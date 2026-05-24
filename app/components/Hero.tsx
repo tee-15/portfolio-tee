@@ -90,11 +90,11 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[0.95] mb-8"
             >
-              Crafting
+              Driving
               <br />
-              <span className="font-medium gradient-text">Digital</span>
+              <span className="font-medium gradient-text">Product</span>
               <br />
-              <span className="font-medium">Excellence</span>
+              <span className="font-medium">Strategy</span>
             </motion.h1>
 
             <motion.p
@@ -103,9 +103,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-muted text-lg lg:text-xl max-w-md leading-relaxed mb-10"
             >
-              I design and build products that merge aesthetic precision with
-              functional power. Every pixel intentional, every interaction
-              meaningful.
+              Bridging the gap between user-centric design and strategic project execution. I build scalable digital solutions with a focus on precision and delivery.
             </motion.p>
 
             <motion.div
@@ -149,6 +147,7 @@ export default function Hero() {
                   src="/cartoon-woman-wearing-glasses.jpg"
                   alt="Temitope Williams - Product Designer & Project Manager"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                   className="object-cover"
                   priority
                 />

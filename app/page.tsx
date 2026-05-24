@@ -47,17 +47,87 @@ const staggerContainer = {
 function AboutSection() {
   const {
     ref,
-    x: decorX,
-    y: decorY,
     mouseX,
     mouseY,
     handleMouseMove,
     handleMouseLeave,
   } = useMouseParallax({ intensity: 20 });
 
-  const { x: decorX2, y: decorY2 } = useMouseParallaxValue(mouseX, mouseY, {
-    intensity: -14,
-  });
+  const stats = [
+    { value: "8+",  label: "Years of Experience",  sub: "FinTech, SaaS, Enterprise & EdTech",  color: "#c45c3e" },
+    { value: "50+", label: "Projects Delivered",    sub: "End-to-end, on time & on scope",       color: "#d4a574" },
+  ];
+
+  const competencies = [
+    {
+      label: "Product Strategy & Execution",
+      color: "#c45c3e",
+      items: ["Product Vision & Roadmap", "GTM Strategy", "Product-Market Fit", "Feature Prioritization (MoSCoW)", "PRD Authoring", "Release Planning"],
+    },
+    {
+      label: "Analytics & Metrics",
+      color: "#d4a574",
+      items: ["KPIs & OKRs", "A/B Testing", "Conversion Rate Optimization", "Churn Reduction", "Data-Driven Decision Making", "Mixpanel · Amplitude · Tableau"],
+    },
+    {
+      label: "Agile & Collaboration",
+      color: "#5a9e8f",
+      items: ["Agile / Scrum / Kanban", "Sprint Planning", "Cross-Functional Leadership", "Stakeholder Management", "Jira · Confluence · Notion"],
+    },
+    {
+      label: "User Research & Design",
+      color: "#8a6fc7",
+      items: ["User-Centered Design", "Customer Journey Mapping", "Usability Testing", "Wireframing & Prototyping", "Design Systems", "Figma · Adobe XD · InVision"],
+    },
+    {
+      label: "Leadership & Operations",
+      color: "#c45c3e",
+      items: ["Team Leadership & Mentoring", "Resource Allocation", "Timeline Management", "Risk Mitigation", "Workshop Facilitation", "Strategic Planning"],
+    },
+  ];
+
+  const toolCategories = [
+    {
+      label: "Design & Prototyping",
+      color: "#c45c3e",
+      tools: [
+        { name: "Figma",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+        { name: "Adobe XD",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg" },
+        { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
+        { name: "Photoshop",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+      ],
+    },
+    {
+      label: "Product & Project Mgmt",
+      color: "#5a9e8f",
+      tools: [
+        { name: "Jira",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
+        { name: "Confluence", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/confluence/confluence-original.svg" },
+        { name: "Notion",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/notion/notion-original.svg" },
+        { name: "Slack",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" },
+      ],
+    },
+    {
+      label: "Analytics",
+      color: "#d4a574",
+      tools: [
+        { name: "Mixpanel",   icon: "https://cdn.worldvectorlogo.com/logos/mixpanel.svg" },
+        { name: "Amplitude",  icon: "https://cdn.worldvectorlogo.com/logos/amplitude-1.svg" },
+        { name: "Tableau",    icon: "https://cdn.worldvectorlogo.com/logos/tableau-software.svg" },
+        { name: "GitHub",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      ],
+    },
+    {
+      label: "Office & Collaboration",
+      color: "#8a6fc7",
+      tools: [
+        { name: "MS Word",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/word/word-original.svg" },
+        { name: "MS Excel",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/excel/excel-original.svg" },
+        { name: "PowerPoint", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powerpoint/powerpoint-original.svg" },
+        { name: "MS Teams",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftteams/microsoftteams-original.svg" },
+      ],
+    },
+  ];
 
   return (
     <section
@@ -69,82 +139,203 @@ function AboutSection() {
     >
       <SectionNumber number="01" className="top-8 right-8 md:right-20" />
       <DottedGrid className="inset-0 w-full h-full" />
-      <GlowOrb mouseX={mouseX} mouseY={mouseY} color="accent-secondary" size={350} intensity={12} className="-top-20 -left-20" />
+      <GlowOrb mouseX={mouseX} mouseY={mouseY} color="accent-secondary" size={400} intensity={12} className="-top-20 -left-20" />
       <FloatingRing mouseX={mouseX} mouseY={mouseY} intensity={20} size={80} className="top-24 right-24" />
       <FloatingDot mouseX={mouseX} mouseY={mouseY} intensity={25} size={8} className="bottom-32 left-24" />
       <FloatingPlus mouseX={mouseX} mouseY={mouseY} intensity={18} className="top-40 left-40" />
       <DiagonalLine className="bottom-20 right-40" />
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
+
+        {/* ── Header ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
+          className="mb-20"
         >
-          <motion.span
-            variants={fadeInUp}
-            className="text-accent text-sm tracking-[0.2em] uppercase font-medium mb-4 block"
-          >
-            About
+          <motion.span variants={fadeInUp} className="text-accent text-sm tracking-[0.2em] uppercase font-medium mb-4 block">
+            About Me
           </motion.span>
-          <motion.h2
-            variants={fadeInUp}
-            className="text-4xl lg:text-5xl font-light tracking-tight mb-8"
-          >
-            Design-driven
+          <motion.h2 variants={fadeInUp} className="text-4xl lg:text-6xl font-light tracking-tight max-w-4xl">
+            Where strategy meets
             <br />
-            <span className="font-medium gradient-text">problem solver</span>
+            <span className="font-semibold gradient-text">design and delivery</span>
           </motion.h2>
-          <motion.div variants={fadeInUp} className="flex gap-8 mt-10">
-            <div>
-              <span className="text-3xl lg:text-4xl font-light text-accent">8+</span>
-              <p className="text-sm text-muted mt-1">Years Experience</p>
-            </div>
-            <div className="w-px bg-border" />
-            <div>
-              <span className="text-3xl lg:text-4xl font-light text-accent-secondary">50+</span>
-              <p className="text-sm text-muted mt-1">Projects Delivered</p>
-            </div>
-            <div className="w-px bg-border" />
-            <div>
-              <span className="text-3xl lg:text-4xl font-light text-accent-tertiary">30+</span>
-              <p className="text-sm text-muted mt-1">Happy Clients</p>
+        </motion.div>
+
+        {/* ── Bio + Stats ── */}
+        <div className="grid lg:grid-cols-[1fr_340px] gap-12 mb-24">
+          {/* Bio */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+            className="space-y-6"
+          >
+            <motion.p variants={fadeInUp} className="text-foreground/90 text-xl leading-relaxed font-light">
+              Results-driven Product Designer and Product Manager with 8+ years of experience delivering digital products across FinTech, SaaS, enterprise, and education-adjacent sectors.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="text-muted text-base leading-relaxed">
+              I have a proven track record of owning end-to-end Product Strategy & Execution — from defining Product Vision & Roadmap and authoring PRDs, to driving Go-To-Market strategy and achieving Product-Market Fit. Expert in Feature Prioritization using MoSCoW frameworks, Agile / Scrum delivery, and Cross-Functional Leadership.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="text-muted text-base leading-relaxed">
+              Passionate about User-Centered Design, I conduct User Research, Customer Journey Mapping, and Usability Testing to transform complex requirements into intuitive, high-impact digital experiences. Demonstrated success in Stakeholder Management, defining KPIs & OKRs, and leveraging A/B Testing and data analytics to optimize Conversion Rates and reduce Churn — operating across both commercial product and social impact dimensions.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="pt-2">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-3">Sectors</p>
+              <div className="flex flex-wrap gap-2">
+                {["FinTech", "SaaS", "Enterprise", "EdTech", "E-Commerce", "Logistics", "Social Impact"].map((s) => (
+                  <span key={s} className="text-xs px-3 py-1.5 border border-border text-muted hover:border-accent hover:text-foreground transition-all duration-200">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Stats card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="flex flex-col border border-border bg-background relative self-start lg:sticky lg:top-32"
+          >
+            <CornerBrackets className="inset-0" />
+            {stats.map((s, i) => (
+              <div key={s.label} className={`p-8 ${i < stats.length - 1 ? "border-b border-border" : ""} hover:bg-surface/50 transition-colors duration-300`}>
+                <span className="text-6xl font-light leading-none block mb-2" style={{ color: s.color }}>{s.value}</span>
+                <p className="text-sm font-medium text-foreground mb-1">{s.label}</p>
+                <p className="text-xs text-muted">{s.sub}</p>
+              </div>
+            ))}
+            <div className="p-6 border-t border-border bg-surface/30">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-3">Currently Available</p>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-xs text-accent">Open to new projects</span>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
+
+        {/* ── Core Competencies ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-60px" }}
           variants={staggerContainer}
-          className="space-y-6 text-muted text-lg leading-relaxed"
+          className="mb-24"
         >
-          <motion.p variants={fadeInUp}>
-            With extensive experience spanning product design, project management,
-            and mobile app development, I bring ideas to life with a focus on
-            user experience and technical excellence.
-          </motion.p>
-          <motion.p variants={fadeInUp}>
-            I believe the best digital products are born at the intersection of
-            beautiful design and robust execution. Every project is an opportunity
-            to create something meaningful.
-          </motion.p>
-          <motion.div variants={fadeInUp} className="pt-4">
-            <div className="flex flex-wrap gap-3">
-              {["Figma", "React", "Next.js", "TypeScript", "Node.js", "Flutter", "Agile", "Scrum"].map(
-                (skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 text-sm border border-border text-muted hover:border-accent hover:text-foreground transition-all duration-300"
-                  >
-                    {skill}
-                  </span>
-                )
-              )}
-            </div>
+          <motion.div variants={fadeInUp} className="flex items-center gap-4 mb-10">
+            <span className="text-xs tracking-[0.2em] uppercase text-muted font-medium whitespace-nowrap">Core Competencies</span>
+            <div className="flex-1 h-px bg-border" />
           </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {competencies.map((comp) => (
+              <motion.div
+                key={comp.label}
+                variants={fadeInUp}
+                className="border border-border bg-background p-6 group hover:bg-surface/40 transition-all duration-300 relative"
+              >
+                <div className="absolute top-0 left-0 right-0 h-[2px] opacity-30 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: comp.color }} />
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: comp.color }} />
+                  <h4 className="text-xs tracking-[0.12em] uppercase font-semibold" style={{ color: comp.color }}>{comp.label}</h4>
+                </div>
+                <ul className="space-y-2">
+                  {comp.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-muted leading-relaxed group-hover:text-foreground/70 transition-colors duration-200">
+                      <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0 bg-border group-hover:bg-accent/50 transition-colors duration-200" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+            {/* Availability CTA card */}
+            <motion.div
+              variants={fadeInUp}
+              className="border border-accent/20 bg-accent/5 p-6 flex flex-col justify-between group hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
+            >
+              <div>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-accent font-medium mb-3">Currently Available</p>
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  Open to product design, product management, and consulting engagements across FinTech, SaaS, and enterprise.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="text-xs text-accent">Available for new projects</span>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
+
+        {/* ── Tools & Stack ── */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+        >
+          <motion.div variants={fadeInUp} className="flex items-center gap-4 mb-10">
+            <span className="text-xs tracking-[0.2em] uppercase text-muted font-medium whitespace-nowrap">Tools & Stack</span>
+            <div className="flex-1 h-px bg-border" />
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {toolCategories.map((cat, catIdx) => (
+              <motion.div
+                key={cat.label}
+                variants={fadeInUp}
+                custom={catIdx * 0.1}
+                className="border border-border bg-background p-6 transition-all duration-300 group relative"
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ backgroundColor: cat.color }}
+                />
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: cat.color }} />
+                  <span className="text-[11px] tracking-[0.15em] uppercase font-semibold" style={{ color: cat.color }}>
+                    {cat.label}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {cat.tools.map((tool) => (
+                    <motion.div
+                      key={tool.name}
+                      whileHover={{ y: -3, scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                      className="flex flex-col items-center gap-2 group/tool"
+                    >
+                      <div className="w-12 h-12 border border-border bg-surface/80 flex items-center justify-center group-hover/tool:border-accent/30 transition-all duration-200">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={tool.icon}
+                          alt={tool.name}
+                          width={26}
+                          height={26}
+                          className="w-6 h-6 object-contain"
+                          loading="lazy"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-muted text-center leading-tight group-hover/tool:text-foreground transition-colors duration-200">
+                        {tool.name}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

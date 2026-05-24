@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
+import { Outfit, Geist_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
 });
@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased`}
+      className={`${outfit.variable} ${geistMono.variable} ${dancingScript.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground">
         {children}

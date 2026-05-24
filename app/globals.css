@@ -11,7 +11,7 @@
   --color-accent-tertiary: #5a9e8f;
   --color-muted: #8a8a8a;
   --color-border: #2a2a2a;
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
   --font-cursive: var(--font-cursive), cursive;
 }
@@ -23,7 +23,7 @@ html {
 body {
   background-color: #0a0a0a;
   color: #f5f0e8;
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
