@@ -99,11 +99,16 @@ const projects: ProjectDetail[] = [
       "Built a scalable multi-tenant SaaS architecture",
     ],
     links: {
-      github: "#",
+      figma: "https://www.figma.com/design/Os5d80oYW9g39CSJMuQWQb/Priceet-Design?node-id=1-5&t=nBJfEfHOvTzqxU9a-1",
       playStore: "#",
       appStore: "#",
     },
-    images: [],
+    images: [
+      "/Priceet Image 1.png",
+      "/Priceet image 2.png",
+      "/Priceet image 3.png",
+      "/Priceet Image 4.png",
+    ],
   },
   {
     id: "04",
@@ -126,11 +131,15 @@ const projects: ProjectDetail[] = [
       "Automated scheduling and billing for enterprise clients",
     ],
     links: {
-      figma: "#",
-      github: "#",
+      figma: "https://www.figma.com/design/RAX8E2J9Kj7CweCsKO66Pc/Lacarte?node-id=7-2965&t=SOyxoh2NEs7yh2td-1",
       website: "#",
     },
-    images: [],
+    images: [
+      "/Lacarte image 1.png",
+      "/Lacarte image 2.png",
+      "/Lacarte image 3.png",
+      "/Lacarte image 4.png",
+    ],
   },
 ];
 

@@ -80,7 +80,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="inline-block text-accent text-sm tracking-[0.2em] uppercase font-medium mb-6">
-                Product Designer & Project Manager
+                Product Designer · Product Manager · Strategist
               </span>
             </motion.div>
 
@@ -90,11 +90,11 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[0.95] mb-8"
             >
-              Driving
+              Turning
               <br />
-              <span className="font-medium gradient-text">Product</span>
+              <span className="font-medium gradient-text">Vision</span>
               <br />
-              <span className="font-medium">Strategy</span>
+              <span className="font-medium">into Product</span>
             </motion.h1>
 
             <motion.p
@@ -103,7 +103,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-muted text-lg lg:text-xl max-w-md leading-relaxed mb-10"
             >
-              Bridging the gap between user-centric design and strategic project execution. I build scalable digital solutions with a focus on precision and delivery.
+              8+ years delivering end-to-end digital products across FinTech, SaaS, and enterprise — from product strategy and roadmapping to high-fidelity design and cross-functional delivery.
             </motion.p>
 
             <motion.div
@@ -123,7 +123,7 @@ export default function Hero() {
                 href="#contact"
                 className="text-sm text-muted hover:text-foreground transition-colors duration-300 tracking-wide border-b border-border hover:border-foreground pb-1"
               >
-                Get in Touch
+                Let&apos;s Collaborate
               </a>
             </motion.div>
           </motion.div>

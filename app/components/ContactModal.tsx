@@ -56,7 +56,7 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_email: "hello@temitopewilliams.com",
+        to_email: "temitopedml@gmail.com",
       };
 
       await emailjs.send(
@@ -289,7 +289,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                   <motion.div variants={fadeInUp} className="space-y-5">
                     <a
-                      href="mailto:hello@temitopewilliams.com"
+                      href="mailto:temitopedml@gmail.com"
                       className="flex items-center gap-4 group"
                     >
                       <div className="w-11 h-11 border border-border flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300">
@@ -298,13 +298,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <div>
                         <span className="text-xs text-muted block">Email</span>
                         <span className="text-sm text-foreground group-hover:text-accent transition-colors">
-                          hello@temitopewilliams.com
+                          temitopedml@gmail.com
                         </span>
                       </div>
                     </a>
 
                     <a
-                      href="tel:+2348012345678"
+                      href="tel:+233598822108"
                       className="flex items-center gap-4 group"
                     >
                       <div className="w-11 h-11 border border-border flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300">
@@ -313,7 +313,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <div>
                         <span className="text-xs text-muted block">Phone</span>
                         <span className="text-sm text-foreground group-hover:text-accent transition-colors">
-                          +234 801 234 5678
+                          +233 598 822 108
                         </span>
                       </div>
                     </a>
@@ -324,25 +324,29 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       </div>
                       <div>
                         <span className="text-xs text-muted block">Location</span>
-                        <span className="text-sm text-foreground">Lagos, Nigeria</span>
+                        <span className="text-sm text-foreground">Remote — Ghana / Nigeria</span>
                       </div>
                     </div>
                   </motion.div>
 
                   <motion.div variants={fadeInUp}>
-                    <span className="text-xs text-muted block mb-3">Follow me</span>
+                    <span className="text-xs text-muted block mb-3">Find me on</span>
                     <div className="flex flex-wrap gap-3">
-                      {["LinkedIn", "Twitter", "GitHub", "Dribbble"].map(
-                        (label) => (
-                          <a
-                            key={label}
-                            href="#"
-                            className="px-3 py-1.5 border border-border text-xs text-muted hover:text-foreground hover:border-accent transition-all duration-300"
-                          >
-                            {label}
-                          </a>
-                        )
-                      )}
+                      {[
+                        { label: "LinkedIn", href: "https://www.linkedin.com/in/temitope-williams-21855a1b2/" },
+                        { label: "GitHub",   href: "https://github.com/tee-15/portfolio-tee" },
+                        { label: "Behance",  href: "https://www.behance.net/devtemi" },
+                      ].map(({ label, href }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 border border-border text-xs text-muted hover:text-foreground hover:border-accent transition-all duration-300"
+                        >
+                          {label}
+                        </a>
+                      ))}
                     </div>
                   </motion.div>
                 </motion.div>
