@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
@@ -20,8 +20,6 @@ export default function CustomCursor() {
   const ringXSpring = useSpring(cursorX, ringSpringConfig);
   const ringYSpring = useSpring(cursorY, ringSpringConfig);
 
-  const handleHoverStart = useCallback(() => setIsHovering(true), []);
-  const handleHoverEnd = useCallback(() => setIsHovering(false), []);
 
   useEffect(() => {
     const isTouchDevice =

@@ -58,13 +58,6 @@ body {
   background-clip: text;
 }
 
-.gradient-text-subtle {
-  background: linear-gradient(135deg, #f5f0e8 0%, #8a8a8a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* Noise overlay */
 .noise-overlay {
   position: fixed;
@@ -96,21 +89,6 @@ body {
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
-}
-
-/* Corner bracket decoration */
-.corner-bracket {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-}
-
-.corner-bracket::before,
-.corner-bracket::after {
-  content: '';
-  position: absolute;
-  background: currentColor;
 }
 
 /* Custom cursor hide - only on fine pointer devices */

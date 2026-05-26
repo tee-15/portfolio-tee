@@ -148,17 +148,17 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxOpen) {
         if (e.key === "Escape") setLightboxOpen(false);
-        if (e.key === "ArrowLeft") handlePrevImage();
-        if (e.key === "ArrowRight") handleNextImage();
-        if (e.key === "+") handleZoomIn();
-        if (e.key === "-") handleZoomOut();
+        if (e.key === "ArrowLeft") setCurrentImageIndex((prev) => project ? (prev - 1 + project.images.length) % project.images.length : prev);
+        if (e.key === "ArrowRight") setCurrentImageIndex((prev) => project ? (prev + 1) % project.images.length : prev);
+        if (e.key === "+") setZoomLevelIndex((prev) => Math.min(prev + 1, ZOOM_LEVELS.length - 1));
+        if (e.key === "-") setZoomLevelIndex((prev) => Math.max(prev - 1, 0));
       } else if (e.key === "Escape") {
         onClose();
       }
     };
     if (isOpen) window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose, lightboxOpen, zoomLevelIndex]);
+  }, [isOpen, onClose, lightboxOpen, project]);
 
   const handleNextImage = () => {
     if (project) setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
@@ -459,7 +459,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       <div className="grid grid-cols-2 gap-4">
                         {project.images.slice(1).map((img, i) => (
                           <motion.button
-                            key={i}
+                            key={`gallery-${img}`}
                             onClick={() => openLightbox(i + 1)}
                             className="relative aspect-[4/3] overflow-hidden border border-border group cursor-pointer"
                             whileHover={{ scale: 1.02 }}

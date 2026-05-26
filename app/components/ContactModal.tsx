@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import { EMAILJS_CONFIG } from "../config/emailjs";
+import { EMAILJS_CONFIG, CONTACT_EMAIL } from "../config/emailjs";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -56,7 +56,7 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_email: "temitopedml@gmail.com",
+        to_email: CONTACT_EMAIL,
       };
 
       await emailjs.send(

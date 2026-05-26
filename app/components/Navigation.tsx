@@ -38,7 +38,7 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <a
-              href="#"
+              href="/"
               className="font-[family-name:var(--font-cursive)] text-xl sm:text-2xl md:text-3xl font-semibold tracking-normal text-foreground hover:text-accent transition-colors duration-300 whitespace-nowrap"
             >
               Temitope Williams
