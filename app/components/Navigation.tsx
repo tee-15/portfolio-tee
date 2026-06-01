@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
+
+const RESUME_PATH = "/Temitope-Williams-Resume.pdf"; // ← update filename if different
 
 const navItems = [
   { label: "Work", href: "#work" },
@@ -54,6 +56,15 @@ export default function Navigation() {
                   {item.label}
                 </a>
               ))}
+              <a
+                href={RESUME_PATH}
+                download
+                className="group inline-flex items-center gap-2 border border-border hover:border-accent px-4 py-2 text-sm text-muted hover:text-foreground transition-all duration-300 relative overflow-hidden"
+              >
+                <span className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-300" />
+                <Download className="w-3.5 h-3.5 group-hover:text-accent transition-colors duration-300" />
+                <span className="tracking-wide">Resume</span>
+              </a>
             </div>
 
             <button
@@ -94,6 +105,18 @@ export default function Navigation() {
                   {item.label}
                 </motion.a>
               ))}
+              <motion.a
+                href={RESUME_PATH}
+                download
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center gap-3 border border-border px-6 py-3 text-sm text-muted hover:text-foreground hover:border-accent transition-all duration-300 self-start"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </motion.a>
             </div>
           </motion.div>
         )}
