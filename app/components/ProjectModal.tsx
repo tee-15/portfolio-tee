@@ -279,6 +279,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   src={project.images[currentImageIndex]}
                   alt={`${project.title} — image ${currentImageIndex + 1}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, 1024px"
                   className="object-contain select-none"
                   priority
                   draggable={false}
@@ -322,6 +323,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     src={img}
                     alt={`Thumbnail ${idx + 1}`}
                     fill
+                    sizes="80px"
+                    loading="lazy"
                     className="object-cover object-top"
                   />
                   {idx === currentImageIndex && (
@@ -374,8 +377,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     src={project.images[0]}
                     alt={project.title}
                     fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     priority
+                    sizes="(max-width: 768px) 100vw, 1152px"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
 
@@ -469,6 +473,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                               src={img}
                               alt={`${project.title} screenshot ${i + 2}`}
                               fill
+                              loading="lazy"
+                              sizes="(max-width: 640px) 50vw, 300px"
                               className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">

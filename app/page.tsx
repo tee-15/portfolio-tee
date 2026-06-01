@@ -31,7 +31,7 @@ const fadeInUp = {
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay, ease: "easeOut" as const },
+    transition: { duration: 0.5, delay, ease: "easeOut" as const },
   }),
 };
 
@@ -39,7 +39,7 @@ const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.1,
     },
   },
 };
