@@ -112,7 +112,10 @@ function AboutSection() {
       color: "#d4a574",
       tools: [
         { name: "Mixpanel",  icon: "https://cdn.simpleicons.org/mixpanel/ffffff" },
-        { name: "Amplitude", icon: "https://cdn.simpleicons.org/amplitude/ffffff" },
+        {
+          name: "Amplitude",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 2L2 19.5h4.5L12 9l5.5 10.5H22L12 2z' fill='white'/><path d='M7.5 19.5h9l-4.5-8.5-4.5 8.5z' fill='white' opacity='0.4'/></svg>`,
+        },
         {
           name: "Tableau",
           icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M11.14 4.588V0h1.72v4.588h4.588v1.72h-4.588V10.9h-1.72V6.308H6.552v-1.72h4.588zm6.862 8.274v-3.45h1.376v3.45H23v1.376h-3.608v3.45h-1.376v-3.45H14.41v-1.376h3.592zM6.552 14.24V10.9H7.93v3.34H11.27v1.376H7.93v3.34H6.552v-3.34H3.21V14.24h3.342zM0 19.412v-3.45h1.376v3.45H4.07v1.376H1.376V24H0v-3.212h-2.694v-1.376H0z'/></svg>`,

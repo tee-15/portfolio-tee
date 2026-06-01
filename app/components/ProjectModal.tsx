@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
@@ -128,10 +128,14 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
   const zoomScale = ZOOM_LEVELS[zoomLevelIndex];
 
-  // Reset zoom when switching images or closing lightbox
-  useEffect(() => {
-    setZoomLevelIndex(0);
-  }, [currentImageIndex, lightboxOpen]);
+  // Reset zoom when switching images or closing lightbox — use functional update, not effect
+  const prevImageIndexRef = React.useRef(currentImageIndex);
+  const prevLightboxRef = React.useRef(lightboxOpen);
+  if (prevImageIndexRef.current !== currentImageIndex || prevLightboxRef.current !== lightboxOpen) {
+    prevImageIndexRef.current = currentImageIndex;
+    prevLightboxRef.current = lightboxOpen;
+    if (zoomLevelIndex !== 0) setZoomLevelIndex(0);
+  }
 
   useEffect(() => {
     if (isOpen) {
