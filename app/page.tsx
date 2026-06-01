@@ -92,9 +92,18 @@ function AboutSection() {
       color: "#c45c3e",
       tools: [
         { name: "Figma",       icon: "https://cdn.simpleicons.org/figma/ffffff" },
-        { name: "Adobe XD",    icon: "https://cdn.simpleicons.org/adobexd/ffffff" },
-        { name: "Illustrator", icon: "https://cdn.simpleicons.org/adobeillustrator/ffffff" },
-        { name: "Photoshop",   icon: "https://cdn.simpleicons.org/adobephotoshop/ffffff" },
+        {
+          name: "Adobe XD",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='4' fill='%23FF61F6'/><path fill='white' d='M14.5 7L19 12l-4.5 5h-2.8l4.2-5-4.2-5h2.8zM9.5 7L5 12l4.5 5H6.7L2.5 12 6.7 7H9.5z'/></svg>`,
+        },
+        {
+          name: "Illustrator",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='4' fill='%23FF9A00'/><path fill='%231a1a1a' d='M8.4 15.5H6.1l-.5 1.8H4l2.4-7.6h1.9l2.4 7.6H8.9l-.5-1.8zm-2-1.4h1.6l-.8-2.9-.8 2.9zm6.6-5.8c.3 0 .5.1.7.3.2.2.3.4.3.7s-.1.5-.3.7c-.2.2-.4.3-.7.3s-.5-.1-.7-.3c-.2-.2-.3-.4-.3-.7s.1-.5.3-.7c.2-.2.4-.3.7-.3zm.7 2.7v5.8h-1.4v-5.8h1.4z'/></svg>`,
+        },
+        {
+          name: "Photoshop",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='4' fill='%2331A8FF'/><path fill='%231a1a1a' d='M5 7.3h3.2c.7 0 1.3.1 1.8.4.5.3.9.6 1.1 1.1.3.5.4 1 .4 1.6 0 .9-.3 1.6-.8 2.1-.6.5-1.4.8-2.5.8H6.4v3.4H5V7.3zm1.4 4.7h1.7c.7 0 1.2-.2 1.5-.5.3-.3.5-.7.5-1.2 0-.5-.2-.9-.5-1.2-.3-.3-.8-.5-1.5-.5H6.4v3.4zm7.1 1.2c0-.5.1-.9.4-1.3.3-.4.6-.7 1.1-.9.5-.2 1-.3 1.6-.3.3 0 .6 0 .9.1v-.3c0-.4-.1-.7-.4-.9-.2-.2-.6-.3-1-.3-.3 0-.6.1-.9.2-.3.1-.5.3-.7.5l-.8-.8c.3-.3.6-.6 1.1-.8.4-.2.9-.3 1.4-.3.9 0 1.6.2 2 .7.5.5.7 1.1.7 2v3.5h-1.3v-.7c-.2.3-.5.5-.8.6-.3.1-.7.2-1.1.2-.4 0-.8-.1-1.1-.3-.3-.2-.6-.4-.8-.7-.2-.3-.3-.7-.3-1.1zm1.3-.1c0 .3.1.6.4.8.2.2.5.3.9.3.5 0 .9-.1 1.2-.4.3-.3.5-.6.5-1.1v-.4c-.3-.1-.6-.1-.9-.1-.5 0-.9.1-1.2.3-.3.2-.5.4-.5.7l-.4-.1z'/></svg>`,
+        },
       ],
     },
     {
@@ -104,7 +113,10 @@ function AboutSection() {
         { name: "Jira",       icon: "https://cdn.simpleicons.org/jira/ffffff" },
         { name: "Confluence", icon: "https://cdn.simpleicons.org/confluence/ffffff" },
         { name: "Notion",     icon: "https://cdn.simpleicons.org/notion/ffffff" },
-        { name: "Slack",      icon: "https://cdn.simpleicons.org/slack/ffffff" },
+        {
+          name: "Slack",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23E01E5A' d='M6 15a2 2 0 1 1 0-4h2v2a2 2 0 0 1-2 2z'/><path fill='%2336C5F0' d='M9 6a2 2 0 1 1 4 0v2H9V6z'/><path fill='%232EB67D' d='M18 9a2 2 0 1 1 0 4h-2V9h2z'/><path fill='%23ECB22E' d='M15 18a2 2 0 1 1-4 0v-2h4v2z'/><path fill='%2336C5F0' d='M6 9h6v6H6z' opacity='.15'/><path fill='%23E01E5A' d='M9 6h2v6H9z'/><path fill='%232EB67D' d='M13 9h2v6h-2z'/><path fill='%23ECB22E' d='M9 13h6v2H9z'/></svg>`,
+        },
       ],
     },
     {
