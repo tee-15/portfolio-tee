@@ -59,12 +59,21 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
         to_email: CONTACT_EMAIL,
       };
 
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
+      // Send both in parallel — auto-reply to sender + notification to you
+      await Promise.all([
+        emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID,
+          templateParams,
+          EMAILJS_CONFIG.PUBLIC_KEY
+        ),
+        emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.NOTIFY_TEMPLATE_ID,
+          templateParams,
+          EMAILJS_CONFIG.PUBLIC_KEY
+        ),
+      ]);
 
       setSubmitted(true);
       setTimeout(() => {
@@ -72,8 +81,8 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
         setFormData({ name: "", email: "", subject: "", message: "" });
         onSubmitted();
       }, 2500);
-    } catch (err) {
-      console.error("EmailJS Error:", err);
+    } catch (err: unknown) {
+      void err;
       setError("Failed to send message. Please try again or email me directly.");
     } finally {
       setIsSubmitting(false);

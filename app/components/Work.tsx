@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { useMouseParallax, useMouseParallaxValue } from "../hooks/useMouseParallax";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { useMouseParallax } from "../hooks/useMouseParallax";
 import ProjectModal, { type ProjectDetail } from "./ProjectModal";
 import {
   SectionNumber,
@@ -15,7 +15,8 @@ import {
   DiagonalLine,
 } from "./Decorations";
 
-const projects: ProjectDetail[] = [
+// ── Featured projects — shown by default ──────────────────────────────────────
+const featuredProjects: ProjectDetail[] = [
   {
     id: "01",
     title: "Hugo Ride",
@@ -38,7 +39,6 @@ const projects: ProjectDetail[] = [
     ],
     links: {
       figma: "https://www.figma.com/design/th5Pijmqf0prdP8Eu6kuGr/Hogo-Ride?node-id=623-2317&t=DqvoR2mZuNaSe6wD-1",
-      website: "#",
     },
     images: [
       "/hugo-ride.png",
@@ -69,7 +69,6 @@ const projects: ProjectDetail[] = [
     ],
     links: {
       figma: "https://www.figma.com/design/4eTlVwTkZJUpZQqLQ9VEZD/Celoxx?node-id=110-2508&m=dev",
-      website: "#",
     },
     images: [
       "/Celoxx-Image 1.png",
@@ -100,8 +99,6 @@ const projects: ProjectDetail[] = [
     ],
     links: {
       figma: "https://www.figma.com/design/Os5d80oYW9g39CSJMuQWQb/Priceet-Design?node-id=1-5&t=nBJfEfHOvTzqxU9a-1",
-      playStore: "#",
-      appStore: "#",
     },
     images: [
       "/Priceet Image 1.png",
@@ -132,7 +129,6 @@ const projects: ProjectDetail[] = [
     ],
     links: {
       figma: "https://www.figma.com/design/RAX8E2J9Kj7CweCsKO66Pc/Lacarte?node-id=7-2965&t=SOyxoh2NEs7yh2td-1",
-      website: "#",
     },
     images: [
       "/Lacarte image 1.png",
@@ -142,6 +138,103 @@ const projects: ProjectDetail[] = [
     ],
   },
 ];
+
+// ── Additional projects — revealed on "View All" ───────────────────────────────
+// Add your extra projects here. Copy the structure above and fill in the details.
+const additionalProjects: ProjectDetail[] = [
+  {
+    id: "05",
+    title: "FacilityBill",
+    category: "FinTech / PropTech",
+    description:
+      "A smart bill payment platform for estates and facilities — covering electricity, DSTV, internet, and micro-loans for utility purchases.",
+    fullDescription:
+      "FacilityBill is a comprehensive utility management and payment platform built for estates and facility managers. It enables residents to pay electricity bills, DSTV subscriptions, and internet services from a single dashboard. A standout feature is the micro-loan facility, which allows users to borrow funds to purchase electricity tokens or cover other utility costs — making essential services accessible even when funds are low. I led the product design and strategy, focusing on simplifying complex billing workflows into an intuitive, trust-building experience for both estate managers and residents.",
+    year: "2025",
+    color: "#5a9e8f",
+    tag: "Product Design",
+    role: "Lead Product Designer",
+    timeline: "5 months",
+    techStack: ["React Native", "Node.js", "PostgreSQL", "Paystack", "Firebase"],
+    outcomes: [
+      "Reduced bill payment friction for 1,000+ estate residents",
+      "Micro-loan feature achieved 80% repayment rate in pilot",
+      "Consolidated 4 utility payment types into one platform",
+      "Onboarded 15+ estates within the first two months",
+    ],
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.facilitybill&hl=en",
+    },
+    images: [
+      "/FacilityBill-Image.png",
+      "/FacilityBill-Image 1.png",
+      "/FacilityBill-Image 2.png",
+      "/FacilityBill-Image 3.png",
+    ],
+  },
+  {
+    id: "06",
+    title: "ELS",
+    category: "Mobility / Luxury",
+    description:
+      "A premium chauffeur-driven ride platform offering a luxury Uber-style experience for discerning passengers.",
+    fullDescription:
+      "ELS (Executive Luxury Service) is a high-end mobility platform that connects passengers with professional chauffeurs for a premium, white-glove travel experience. Unlike standard ride-hailing apps, ELS focuses on comfort, discretion, and reliability — catering to executives, high-net-worth individuals, and anyone who values a superior ride experience. The platform features advance booking, real-time tracking, curated vehicle categories, and a seamless in-app payment flow. I owned the end-to-end product design, crafting a visual language and UX that reflects the luxury positioning of the brand.",
+    year: "2025",
+    color: "#d4a574",
+    tag: "Product Design",
+    role: "Lead Product Designer",
+    timeline: "4 months",
+    techStack: ["Flutter", "Node.js", "Google Maps API", "Stripe", "Firebase"],
+    outcomes: [
+      "Designed a premium booking flow with under 3 taps to confirm a ride",
+      "Achieved 4.9/5 average driver rating in beta launch",
+      "Reduced cancellation rate by 35% through advance scheduling",
+      "Built a driver onboarding flow that cut verification time by 60%",
+    ],
+    links: {
+      figma: "https://www.figma.com/design/GpAuYiHO7o9MBr0rNHRG11/Els?node-id=1-3&t=1jmZUlfWMHgiZjjw-1",
+    },
+    images: [
+      "/ELS-Image1.png",
+      "/ELS-Image 2.png",
+      "/ELS-Image 3.png",
+      "/ELS-Image 4.png",
+    ],
+  },
+  {
+    id: "07",
+    title: "BuzzMap",
+    category: "Events / Social Discovery",
+    description:
+      "A location-based event discovery platform that helps users find exciting events happening near them in real time.",
+    fullDescription:
+      "BuzzMap is a social event discovery platform that uses geolocation to surface relevant events happening in a user's immediate vicinity. Whether it's a concert, pop-up market, networking event, or community gathering — BuzzMap surfaces it on an interactive map in real time. Users can RSVP, share events, and follow organisers, while event hosts get powerful tools to promote and manage attendance. I led the product design and UX strategy, focusing on making discovery feel effortless and the map interface intuitive across both mobile and web.",
+    year: "2025",
+    color: "#8a6fc7",
+    tag: "Product Design",
+    role: "Product Designer & Product Manager",
+    timeline: "6 months",
+    techStack: ["React Native", "Next.js", "Google Maps API", "Node.js", "MongoDB"],
+    outcomes: [
+      "Mapped 500+ events across 3 cities in the first month",
+      "70% of users discovered at least one new event per week",
+      "Event host tools reduced setup time from 20 mins to under 5",
+      "Achieved 4.7/5 app store rating in beta",
+    ],
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.nodescale.buzzmap",
+    },
+    images: [
+      "/BuzzMap-Image.png",
+      "/BuzzMap-Image 1.png",
+      "/BuzzMap-Image 2.png",
+      "/BuzzMap-Image 3.png",
+    ],
+  },
+];
+
+const allProjects = [...featuredProjects, ...additionalProjects];
 
 function ProjectCard({
   project,
@@ -156,13 +249,13 @@ function ProjectCard({
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay: Math.min(index * 0.1, 0.4) }}
       className="group cursor-pointer"
       onClick={onClick}
     >
       <div className="grid lg:grid-cols-[1fr_2fr_1fr] gap-6 lg:gap-12 items-start py-10 border-b border-border hover:bg-surface/50 transition-colors duration-500 px-4 -mx-4 relative">
-        {/* Color accent line on hover */}
+        {/* Accent line */}
         <div
           className="absolute left-0 top-0 bottom-0 w-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{ backgroundColor: project.color }}
@@ -180,23 +273,16 @@ function ProjectCard({
             </h3>
             <span
               className="text-[10px] tracking-wider uppercase px-2 py-1 border hidden sm:inline-block"
-              style={{
-                borderColor: `${project.color}30`,
-                color: project.color,
-              }}
+              style={{ borderColor: `${project.color}30`, color: project.color }}
             >
               {project.tag}
             </span>
           </div>
-          <p className="text-muted leading-relaxed max-w-xl">
-            {project.description}
-          </p>
+          <p className="text-muted leading-relaxed max-w-xl">{project.description}</p>
         </div>
 
         <div className="flex items-center justify-between lg:justify-end gap-4">
-          <span className="text-sm text-muted tracking-wide">
-            {project.category}
-          </span>
+          <span className="text-sm text-muted tracking-wide">{project.category}</span>
           <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-300">
             <ArrowUpRight className="w-4 h-4 group-hover:text-background transition-colors" />
           </div>
@@ -207,10 +293,9 @@ function ProjectCard({
 }
 
 export default function Work() {
-  const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(
-    null
-  );
+  const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   const handleOpenProject = (project: ProjectDetail) => {
     setSelectedProject(project);
@@ -224,17 +309,14 @@ export default function Work() {
 
   const {
     ref,
-    x: decorX,
-    y: decorY,
     mouseX,
     mouseY,
     handleMouseMove,
     handleMouseLeave,
   } = useMouseParallax({ intensity: 16 });
 
-  const { x: decorX2, y: decorY2 } = useMouseParallaxValue(mouseX, mouseY, {
-    intensity: -10,
-  });
+  const visibleProjects = showAll ? allProjects : featuredProjects;
+  const hasMore = additionalProjects.length > 0;
 
   return (
     <section
@@ -246,56 +328,45 @@ export default function Work() {
     >
       <SectionNumber number="00" className="top-4 right-4 md:right-16" />
       <DottedGrid className="inset-0 w-full h-full" />
-      <GlowOrb
-        mouseX={mouseX}
-        mouseY={mouseY}
-        color="accent"
-        size={250}
-        intensity={10}
-        className="top-0 left-1/4"
-      />
-      <FloatingRing
-        mouseX={mouseX}
-        mouseY={mouseY}
-        intensity={16}
-        size={60}
-        className="top-24 right-16"
-      />
-      <FloatingDot
-        mouseX={mouseX}
-        mouseY={mouseY}
-        intensity={20}
-        size={5}
-        className="bottom-32 left-20"
-      />
-      <FloatingPlus
-        mouseX={mouseX}
-        mouseY={mouseY}
-        intensity={14}
-        className="top-48 left-48"
-      />
+      <GlowOrb mouseX={mouseX} mouseY={mouseY} color="accent" size={250} intensity={10} className="top-0 left-1/4" />
+      <FloatingRing mouseX={mouseX} mouseY={mouseY} intensity={16} size={60} className="top-24 right-16" />
+      <FloatingDot mouseX={mouseX} mouseY={mouseY} intensity={20} size={5} className="bottom-32 left-20" />
+      <FloatingPlus mouseX={mouseX} mouseY={mouseY} intensity={14} className="top-48 left-48" />
       <DiagonalLine className="bottom-24 right-32" />
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-20"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-20"
         >
-          <span className="text-accent text-sm tracking-[0.2em] uppercase font-medium mb-4 block">
-            Selected Work
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-light tracking-tight">
-            Projects that define
-            <br />
-            <span className="font-medium gradient-text">craft and purpose</span>
-          </h2>
+          <div>
+            <span className="text-accent text-sm tracking-[0.2em] uppercase font-medium mb-4 block">
+              Selected Work
+            </span>
+            <h2 className="text-4xl lg:text-5xl font-light tracking-tight">
+              Projects that define
+              <br />
+              <span className="font-medium gradient-text">craft and purpose</span>
+            </h2>
+          </div>
+
+          {/* Project count badge */}
+          <div className="flex items-center gap-3 self-start sm:self-end pb-1">
+            <span className="text-xs text-muted font-mono tracking-wider">
+              {allProjects.length} projects
+            </span>
+            <div className="w-8 h-px bg-border" />
+          </div>
         </motion.div>
 
+        {/* Project list */}
         <div>
-          {projects.map((project, index) => (
+          {/* Featured — always visible */}
+          {featuredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -303,7 +374,62 @@ export default function Work() {
               onClick={() => handleOpenProject(project)}
             />
           ))}
+
+          {/* Additional — revealed on expand */}
+          <AnimatePresence>
+            {showAll && additionalProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+                style={{ overflow: "hidden" }}
+              >
+                <ProjectCard
+                  project={project}
+                  index={featuredProjects.length + index}
+                  onClick={() => handleOpenProject(project)}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
+
+        {/* View All / Show Less button */}
+        {hasMore && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex justify-center mt-16"
+          >
+            <motion.button
+              onClick={() => setShowAll((prev) => !prev)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center gap-3 border border-border hover:border-accent px-8 py-4 text-sm text-muted hover:text-foreground tracking-wide transition-all duration-300 relative"
+            >
+              {/* Animated accent underline */}
+              <span className="absolute bottom-0 left-0 h-[2px] bg-accent w-0 group-hover:w-full transition-all duration-500" />
+              {showAll ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  View All Projects
+                  <span className="text-xs font-mono text-accent">
+                    +{additionalProjects.length}
+                  </span>
+                  <ChevronDown className="w-4 h-4" />
+                </>
+              )}
+            </motion.button>
+          </motion.div>
+        )}
       </div>
 
       <ProjectModal

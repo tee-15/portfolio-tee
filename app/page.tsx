@@ -91,40 +91,55 @@ function AboutSection() {
       label: "Design & Prototyping",
       color: "#c45c3e",
       tools: [
-        { name: "Figma",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-        { name: "Adobe XD",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg" },
-        { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
-        { name: "Photoshop",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+        { name: "Figma",       icon: "https://cdn.simpleicons.org/figma/ffffff" },
+        { name: "Adobe XD",    icon: "https://cdn.simpleicons.org/adobexd/ffffff" },
+        { name: "Illustrator", icon: "https://cdn.simpleicons.org/adobeillustrator/ffffff" },
+        { name: "Photoshop",   icon: "https://cdn.simpleicons.org/adobephotoshop/ffffff" },
       ],
     },
     {
       label: "Product & Project Mgmt",
       color: "#5a9e8f",
       tools: [
-        { name: "Jira",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
-        { name: "Confluence", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/confluence/confluence-original.svg" },
-        { name: "Notion",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/notion/notion-original.svg" },
-        { name: "Slack",      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" },
+        { name: "Jira",       icon: "https://cdn.simpleicons.org/jira/ffffff" },
+        { name: "Confluence", icon: "https://cdn.simpleicons.org/confluence/ffffff" },
+        { name: "Notion",     icon: "https://cdn.simpleicons.org/notion/ffffff" },
+        { name: "Slack",      icon: "https://cdn.simpleicons.org/slack/ffffff" },
       ],
     },
     {
       label: "Analytics",
       color: "#d4a574",
       tools: [
-        { name: "Mixpanel",   icon: "https://cdn.worldvectorlogo.com/logos/mixpanel.svg" },
-        { name: "Amplitude",  icon: "https://cdn.worldvectorlogo.com/logos/amplitude-1.svg" },
-        { name: "Tableau",    icon: "https://cdn.worldvectorlogo.com/logos/tableau-software.svg" },
-        { name: "GitHub",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+        { name: "Mixpanel",  icon: "https://cdn.simpleicons.org/mixpanel/ffffff" },
+        { name: "Amplitude", icon: "https://cdn.simpleicons.org/amplitude/ffffff" },
+        {
+          name: "Tableau",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M11.14 4.588V0h1.72v4.588h4.588v1.72h-4.588V10.9h-1.72V6.308H6.552v-1.72h4.588zm6.862 8.274v-3.45h1.376v3.45H23v1.376h-3.608v3.45h-1.376v-3.45H14.41v-1.376h3.592zM6.552 14.24V10.9H7.93v3.34H11.27v1.376H7.93v3.34H6.552v-3.34H3.21V14.24h3.342zM0 19.412v-3.45h1.376v3.45H4.07v1.376H1.376V24H0v-3.212h-2.694v-1.376H0z'/></svg>`,
+        },
+        { name: "GitHub",    icon: "https://cdn.simpleicons.org/github/ffffff" },
       ],
     },
     {
       label: "Office & Collaboration",
       color: "#8a6fc7",
       tools: [
-        { name: "MS Word",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/word/word-original.svg" },
-        { name: "MS Excel",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/excel/excel-original.svg" },
-        { name: "PowerPoint", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powerpoint/powerpoint-original.svg" },
-        { name: "MS Teams",   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftteams/microsoftteams-original.svg" },
+        {
+          name: "MS Word",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%232B579A' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%232B579A' d='M11 8l1.5 5 1.5-4 1.5 4 1.5-5h1l-2 7h-1l-1.5-4-1.5 4h-1l-2-7z'/></svg>`,
+        },
+        {
+          name: "MS Excel",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23217346' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%23217346' d='M11 8l2 3-2 3h1.5l1.25-2 1.25 2H14.5l-2-3 2-3H13l-1.25 2L10.5 8z'/></svg>`,
+        },
+        {
+          name: "PowerPoint",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23B7472A' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%23B7472A' d='M11 8h3c1.1 0 2 .9 2 2s-.9 2-2 2h-1.5v2H11V8zm1.5 3H14c.55 0 1-.45 1-1s-.45-1-1-1h-1.5v2z'/></svg>`,
+        },
+        {
+          name: "MS Teams",
+          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%235059C9' d='M14.5 9A2.5 2.5 0 1 0 14.5 4a2.5 2.5 0 0 0 0 5zm3.5 1h4a1 1 0 0 1 1 1v5a3 3 0 0 1-3 3 3 3 0 0 1-3-3v-5.5a.5.5 0 0 1 .5-.5H18z'/><path fill='%237B83EB' d='M9.5 10A3.5 3.5 0 1 0 9.5 3a3.5 3.5 0 0 0 0 7z'/><path fill='%234B53BC' d='M15 11H4a1 1 0 0 0-1 1v6a5 5 0 0 0 10 0v-6a1 1 0 0 0-1-1z'/><path fill='white' opacity='.5' d='M9.5 12v7'/></svg>`,
+        },
       ],
     },
   ];
