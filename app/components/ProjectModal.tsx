@@ -33,6 +33,7 @@ export interface ProjectDetail {
   timeline: string;
   techStack: string[];
   outcomes: string[];
+  designProcess?: { phase: string; items: string[] }[];
   links: {
     figma?: string;
     github?: string;
@@ -128,14 +129,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
   const zoomScale = ZOOM_LEVELS[zoomLevelIndex];
 
-  // Reset zoom when switching images or closing lightbox — use functional update, not effect
-  const prevImageIndexRef = React.useRef(currentImageIndex);
-  const prevLightboxRef = React.useRef(lightboxOpen);
-  if (prevImageIndexRef.current !== currentImageIndex || prevLightboxRef.current !== lightboxOpen) {
-    prevImageIndexRef.current = currentImageIndex;
-    prevLightboxRef.current = lightboxOpen;
-    if (zoomLevelIndex !== 0) setZoomLevelIndex(0);
-  }
+  // Reset zoom when switching images or closing lightbox
+  useEffect(() => {
+    const timer = setTimeout(() => setZoomLevelIndex(0), 0);
+    return () => clearTimeout(timer);
+  }, [currentImageIndex, lightboxOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -275,7 +273,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               style={{ cursor: zoomScale > 1 ? "zoom-out" : "zoom-in" }}
               onClick={(e) => {
                 e.stopPropagation();
-                zoomScale > 1 ? handleZoomOut() : handleZoomIn();
+                if (zoomScale > 1) { handleZoomOut(); } else { handleZoomIn(); }
               }}
             >
               <div className="relative w-full aspect-[16/10]">
@@ -362,6 +360,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             exit={{ opacity: 0, y: 50, scale: 0.97 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
             className="relative w-full max-w-6xl bg-surface border-x md:border border-border shadow-2xl my-0 md:my-8"
           >
             {/* Close button */}
@@ -415,6 +416,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </motion.div>
                   <motion.h2
                     variants={fadeInUp}
+                    id="project-modal-title"
                     className="text-3xl md:text-5xl font-light tracking-tight"
                   >
                     {project.title}
@@ -435,9 +437,70 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     <p className="text-muted text-lg leading-relaxed">{project.fullDescription}</p>
                   </motion.div>
 
-                  {/* Key Outcomes */}
-                  {project.outcomes.length > 0 && (
+                  {/* Design Process */}
+                  {project.designProcess && project.designProcess.length > 0 && (
                     <motion.div variants={fadeInUp} className="mb-10">
+                      <h3 className="text-sm tracking-[0.2em] uppercase text-accent font-medium mb-8">
+                        My Design Process
+                      </h3>
+                      <div className="relative">
+                        {/* Connecting line */}
+                        <div
+                          className="absolute top-5 left-0 right-0 h-px hidden md:block"
+                          style={{ backgroundColor: `${project.color}20` }}
+                        />
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                          {project.designProcess.map((step, i) => (
+                            <motion.div
+                              key={step.phase}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4, delay: i * 0.08 }}
+                              className="relative flex flex-col"
+                            >
+                              {/* Phase number node */}
+                              <div className="flex items-center gap-3 mb-4 md:flex-col md:items-start md:gap-0">
+                                <div
+                                  className="relative z-10 flex-shrink-0 w-10 h-10 border-2 flex items-center justify-center text-xs font-mono font-semibold md:mb-3"
+                                  style={{
+                                    borderColor: project.color,
+                                    color: project.color,
+                                    backgroundColor: `${project.color}10`,
+                                  }}
+                                >
+                                  {String(i + 1).padStart(2, "0")}
+                                </div>
+                                <h4
+                                  className="text-xs font-semibold tracking-[0.1em] uppercase"
+                                  style={{ color: project.color }}
+                                >
+                                  {step.phase}
+                                </h4>
+                              </div>
+                              {/* Items */}
+                              <ul className="space-y-1.5 md:pl-0">
+                                {step.items.map((item) => (
+                                  <li
+                                    key={item}
+                                    className="flex items-start gap-1.5 text-[11px] text-muted leading-snug"
+                                  >
+                                    <span
+                                      className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0"
+                                      style={{ backgroundColor: `${project.color}60` }}
+                                    />
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Key Outcomes */}
+                  {project.outcomes.length > 0 && (                    <motion.div variants={fadeInUp} className="mb-10">
                       <h3 className="text-sm tracking-[0.2em] uppercase text-accent font-medium mb-4">
                         Key Outcomes
                       </h3>

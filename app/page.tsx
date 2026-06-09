@@ -24,7 +24,7 @@ import {
   CornerBrackets,
   DiagonalLine,
 } from "./components/Decorations";
-import { useMouseParallax, useMouseParallaxValue } from "./hooks/useMouseParallax";
+import { useMouseParallax } from "./hooks/useMouseParallax";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -374,17 +374,11 @@ function AboutSection() {
 function ServicesSection() {
   const {
     ref,
-    x: decorX,
-    y: decorY,
     mouseX,
     mouseY,
     handleMouseMove,
     handleMouseLeave,
   } = useMouseParallax({ intensity: 18 });
-
-  const { x: decorX2, y: decorY2 } = useMouseParallaxValue(mouseX, mouseY, {
-    intensity: -12,
-  });
 
   const services = [
     {
@@ -495,17 +489,11 @@ function ServicesSection() {
 function ContactSection({ onOpen }: { onOpen: () => void }) {
   const {
     ref,
-    x: decorX,
-    y: decorY,
     mouseX,
     mouseY,
     handleMouseMove,
     handleMouseLeave,
   } = useMouseParallax({ intensity: 22 });
-
-  const { x: decorX2, y: decorY2 } = useMouseParallaxValue(mouseX, mouseY, {
-    intensity: -16,
-  });
 
   return (
     <section

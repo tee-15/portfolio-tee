@@ -15,6 +15,34 @@ import {
   DiagonalLine,
 } from "./Decorations";
 
+// ── Shared design process — applied to all projects ──────────────────────────
+const designProcess = [
+  {
+    phase: "Discovery",
+    items: ["Stakeholder interviews", "Business analysis", "User research"],
+  },
+  {
+    phase: "Define",
+    items: ["Problem identification", "User personas", "Journey mapping"],
+  },
+  {
+    phase: "Ideate",
+    items: ["Brainstorming", "User flows", "Information architecture"],
+  },
+  {
+    phase: "Design",
+    items: ["Wireframes", "High fidelity UI", "Design systems"],
+  },
+  {
+    phase: "Test",
+    items: ["User testing", "Iterations", "Improvements"],
+  },
+  {
+    phase: "Launch & Measure",
+    items: ["Product launch", "Analytics", "Optimization"],
+  },
+];
+
 // ── Featured projects — shown by default ──────────────────────────────────────
 const featuredProjects: ProjectDetail[] = [
   {
@@ -40,9 +68,9 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/th5Pijmqf0prdP8Eu6kuGr/Hogo-Ride?node-id=623-2317&t=DqvoR2mZuNaSe6wD-1",
     },
+    designProcess,
     images: [
       "/hugo-ride.png",
-      "/hugo-ride-gallery-1.png",
       "/hugo-ride-gallery-2.png",
       "/hugo-ride-gallery-3.png",
     ],
@@ -70,6 +98,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/4eTlVwTkZJUpZQqLQ9VEZD/Celoxx?node-id=110-2508&m=dev",
     },
+    designProcess,
     images: [
       "/Celoxx-Image 1.png",
       "/Celoxx-Image 2.png",
@@ -100,6 +129,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/Os5d80oYW9g39CSJMuQWQb/Priceet-Design?node-id=1-5&t=nBJfEfHOvTzqxU9a-1",
     },
+    designProcess,
     images: [
       "/Priceet Image 1.png",
       "/Priceet image 2.png",
@@ -130,6 +160,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/RAX8E2J9Kj7CweCsKO66Pc/Lacarte?node-id=7-2965&t=SOyxoh2NEs7yh2td-1",
     },
+    designProcess,
     images: [
       "/Lacarte image 1.png",
       "/Lacarte image 2.png",
@@ -165,8 +196,8 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.facilitybill&hl=en",
     },
+    designProcess,
     images: [
-      "/FacilityBill-Image.png",
       "/FacilityBill-Image 1.png",
       "/FacilityBill-Image 2.png",
       "/FacilityBill-Image 3.png",
@@ -195,6 +226,7 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/GpAuYiHO7o9MBr0rNHRG11/Els?node-id=1-3&t=1jmZUlfWMHgiZjjw-1",
     },
+    designProcess,
     images: [
       "/ELS-Image1.png",
       "/ELS-Image 2.png",
@@ -225,6 +257,7 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.nodescale.buzzmap",
     },
+    designProcess,
     images: [
       "/BuzzMap-Image.png",
       "/BuzzMap-Image 1.png",
@@ -315,7 +348,6 @@ export default function Work() {
     handleMouseLeave,
   } = useMouseParallax({ intensity: 16 });
 
-  const visibleProjects = showAll ? allProjects : featuredProjects;
   const hasMore = additionalProjects.length > 0;
 
   return (

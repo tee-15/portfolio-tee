@@ -72,6 +72,8 @@ export default function Navigation() {
               className="md:hidden p-2 -mr-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -90,6 +92,9 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
+            id="mobile-menu"
+            role="dialog"
+            aria-label="Navigation menu"
             className="fixed inset-0 z-40 bg-background pt-24 px-6 md:hidden"
           >
             <div className="flex flex-col gap-8">

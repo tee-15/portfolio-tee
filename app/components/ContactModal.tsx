@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -37,6 +37,14 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clear timer on unmount to avoid state update on unmounted component
+  useEffect(() => {
+    return () => {
+      if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -59,30 +67,31 @@ function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
         to_email: CONTACT_EMAIL,
       };
 
-      // Send both in parallel — auto-reply to sender + notification to you
-      await Promise.all([
-        emailjs.send(
-          EMAILJS_CONFIG.SERVICE_ID,
-          EMAILJS_CONFIG.TEMPLATE_ID,
-          templateParams,
-          EMAILJS_CONFIG.PUBLIC_KEY
-        ),
+      // Auto-reply to sender — required, must succeed
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+
+      // Notification to owner — fire-and-forget, don't block success if template not set up yet
+      if (EMAILJS_CONFIG.NOTIFY_TEMPLATE_ID !== 'YOUR_NOTIFY_TEMPLATE_ID') {
         emailjs.send(
           EMAILJS_CONFIG.SERVICE_ID,
           EMAILJS_CONFIG.NOTIFY_TEMPLATE_ID,
           templateParams,
           EMAILJS_CONFIG.PUBLIC_KEY
-        ),
-      ]);
+        ).catch(() => {/* notification failure is non-critical */});
+      }
 
       setSubmitted(true);
-      setTimeout(() => {
+      dismissTimerRef.current = setTimeout(() => {
         setSubmitted(false);
         setFormData({ name: "", email: "", subject: "", message: "" });
         onSubmitted();
       }, 2500);
-    } catch (err: unknown) {
-      void err;
+    } catch {
       setError("Failed to send message. Please try again or email me directly.");
     } finally {
       setIsSubmitting(false);
@@ -245,6 +254,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             exit={{ opacity: 0, y: 40, scale: 0.96 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-modal-title"
             className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-surface border border-border shadow-2xl"
           >
             {/* Close button */}
@@ -272,6 +284,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </motion.span>
                 <motion.h2
                   variants={fadeInUp}
+                  id="contact-modal-title"
                   className="text-3xl md:text-4xl font-light tracking-tight"
                 >
                   Let&apos;s start a{" "}

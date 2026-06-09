@@ -33,13 +33,17 @@ export const metadata: Metadata = {
     template: "%s | Temitope Williams",
   },
   description:
-    "Crafting digital experiences with precision and elegance. Product design, project management, and full-stack development portfolio.",
+    "Results-driven Product Designer and Product Manager with 8+ years delivering digital products across FinTech, SaaS, enterprise, and education sectors.",
   keywords: [
     "Product Designer",
+    "Product Manager",
     "Project Manager",
-    "Mobile App Developer",
     "UI/UX Design",
+    "FinTech",
+    "SaaS",
     "Portfolio",
+    "Accra",
+    "Ghana",
     "Lagos",
     "Nigeria",
   ],
@@ -50,16 +54,25 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://temitopewilliams.com",
     siteName: "Temitope Williams",
-    title: "Temitope Williams — Product Designer & Project Manager",
+    title: "Temitope Williams — Product Designer & Product Manager",
     description:
-      "Crafting digital experiences with precision and elegance. Product design, project management, and full-stack development portfolio.",
+      "Results-driven Product Designer and Product Manager with 8+ years delivering digital products across FinTech, SaaS and enterprise.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Temitope Williams — Product Designer & Product Manager",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Temitope Williams — Product Designer & Project Manager",
+    title: "Temitope Williams — Product Designer & Product Manager",
     description:
-      "Crafting digital experiences with precision and elegance. Product design, project management, and full-stack development portfolio.",
+      "Results-driven Product Designer and Product Manager with 8+ years delivering digital products across FinTech, SaaS and enterprise.",
     creator: "@temitopewilliams",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

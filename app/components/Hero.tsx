@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useMouseParallax, useMouseParallaxValue } from "../hooks/useMouseParallax";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import Image from "next/image";
 import { CornerBrackets, DottedGrid } from "./Decorations";
 
@@ -29,6 +30,7 @@ export default function Hero() {
   const { x: textX, y: textY } = useMouseParallaxValue(mouseX, mouseY, {
     intensity: 8,
   });
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
@@ -173,7 +175,7 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <ArrowDown className="w-5 h-5 text-muted" />
