@@ -440,51 +440,40 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   {/* Design Process */}
                   {project.designProcess && project.designProcess.length > 0 && (
                     <motion.div variants={fadeInUp} className="mb-10">
-                      <h3 className="text-sm tracking-[0.2em] uppercase text-accent font-medium mb-8">
+                      <h3 className="text-sm tracking-[0.2em] uppercase text-accent font-medium mb-6">
                         My Design Process
                       </h3>
-                      <div className="relative">
-                        {/* Connecting line */}
-                        <div
-                          className="absolute top-5 left-0 right-0 h-px hidden md:block"
-                          style={{ backgroundColor: `${project.color}20` }}
-                        />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                          {project.designProcess.map((step, i) => (
-                            <motion.div
-                              key={step.phase}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.4, delay: i * 0.08 }}
-                              className="relative flex flex-col border border-border bg-background p-5 group hover:border-opacity-60 transition-all duration-300"
+                      <div className="grid grid-cols-1 gap-3">
+                        {project.designProcess.map((step, i) => (
+                          <motion.div
+                            key={step.phase}
+                            initial={{ opacity: 0, x: -16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.35, delay: i * 0.07 }}
+                            className="flex gap-5 border border-border bg-background p-5 hover:border-accent/30 transition-colors duration-300 group"
+                          >
+                            {/* Step number */}
+                            <div
+                              className="flex-shrink-0 w-8 h-8 flex items-center justify-center border text-[11px] font-mono font-bold mt-0.5"
+                              style={{ borderColor: `${project.color}50`, color: project.color, backgroundColor: `${project.color}08` }}
                             >
-                              {/* Top accent line */}
-                              <div
-                                className="absolute top-0 left-0 right-0 h-[2px]"
-                                style={{ backgroundColor: `${project.color}50` }}
-                              />
-                              {/* Phase number + label */}
-                              <div className="flex items-center gap-3 mb-3">
-                                <span
-                                  className="text-[10px] font-mono font-semibold w-6 h-6 flex items-center justify-center border flex-shrink-0"
-                                  style={{ borderColor: `${project.color}60`, color: project.color }}
-                                >
-                                  {String(i + 1).padStart(2, "0")}
-                                </span>
-                                <h4
-                                  className="text-xs font-semibold tracking-[0.1em] uppercase"
-                                  style={{ color: project.color }}
-                                >
-                                  {step.phase}
-                                </h4>
-                              </div>
-                              {/* Description */}
-                              <p className="text-xs text-muted leading-relaxed">
+                              {String(i + 1).padStart(2, "0")}
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <h4
+                                className="text-xs font-semibold tracking-[0.1em] uppercase mb-2"
+                                style={{ color: project.color }}
+                              >
+                                {step.phase}
+                              </h4>
+                              <p className="text-sm text-muted leading-relaxed">
                                 {step.description}
                               </p>
-                            </motion.div>
-                          ))}
-                        </div>
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
                     </motion.div>
                   )}
