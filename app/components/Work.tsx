@@ -15,32 +15,56 @@ import {
   DiagonalLine,
 } from "./Decorations";
 
-// ── Shared design process — applied to all projects ──────────────────────────
-const designProcess = [
-  {
-    phase: "Discovery",
-    items: ["Stakeholder interviews", "Business analysis", "User research"],
-  },
-  {
-    phase: "Define",
-    items: ["Problem identification", "User personas", "Journey mapping"],
-  },
-  {
-    phase: "Ideate",
-    items: ["Brainstorming", "User flows", "Information architecture"],
-  },
-  {
-    phase: "Design",
-    items: ["Wireframes", "High fidelity UI", "Design systems"],
-  },
-  {
-    phase: "Test",
-    items: ["User testing", "Iterations", "Improvements"],
-  },
-  {
-    phase: "Launch & Measure",
-    items: ["Product launch", "Analytics", "Optimization"],
-  },
+// ── Per-project design processes ─────────────────────────────────────────────
+
+const dpHugoRide = [
+  { phase: "Discovery", description: "I conducted interviews with parents to understand their biggest anxieties around school transportation and mapped existing competitor gaps in child-safety logistics." },
+  { phase: "User Personas", description: "I defined three core personas — the anxious parent, the school administrator, and the verified driver — each with distinct goals, pain points, and success criteria." },
+  { phase: "User Flows", description: "I mapped end-to-end flows for subscription sign-up, real-time tracking, and the emergency alert system to ensure every critical action was intuitive and fast." },
+  { phase: "Design", description: "I created high-fidelity UI with a trust-centric design language and built a scalable design system shared across the parent and driver applications." },
+  { phase: "Test & Iterate", description: "I ran usability sessions with 8 parents and iterated on the live-tracking screen and notification hierarchy based on their feedback before handoff." },
+];
+
+const dpCeloxx = [
+  { phase: "Discovery", description: "I interviewed students about study friction and benchmarked five EdTech platforms to identify the gap Celoxx could fill with AI-driven personalisation." },
+  { phase: "Define", description: "The core problem was clear — students were overwhelmed by dense textbook content. I focused the product on a secondary school student persona preparing for high-stakes exams." },
+  { phase: "Design", description: "I designed wireframes and high-fidelity screens for the upload → summary → quiz flow, prioritising clarity and low cognitive load throughout the experience." },
+  { phase: "Test & Iterate", description: "I A/B tested two quiz layouts and used the findings to reduce the time-to-first-quiz from four steps down to two, significantly improving early activation." },
+];
+
+const dpPriceet = [
+  { phase: "Discovery", description: "I conducted market research on price-sensitive consumers in Nigeria and ran stakeholder workshops with three retail partners to align on the collective-buying model." },
+  { phase: "Information Architecture", description: "I structured the product catalogue, group-buy, and checkout flows for buyers, and separately mapped the retailer dashboard and inventory management experience." },
+  { phase: "Design", description: "I designed high-fidelity screens for the marketplace and the SaaS retailer portal, building a shared component library that maintained consistency across both surfaces." },
+  { phase: "Launch & Measure", description: "Post-launch I tracked conversion rate and group-buy completion rate, then optimised the checkout funnel after identifying key drop-off points in the analytics." },
+];
+
+const dpLacrate = [
+  { phase: "Discovery", description: "I conducted field research in two Lagos estates, observing waste collection operations first-hand and interviewing estate managers about their scheduling and coordination pain points." },
+  { phase: "Define", description: "The core problem was the absence of any reliable digital system for scheduling or tracking collections. I defined two primary personas: the estate facility manager and the resident household." },
+  { phase: "Design", description: "I designed the booking flow, a driver tracking map, and automated billing interface, plus a responsive web dashboard giving estate managers full visibility over operations." },
+  { phase: "Test", description: "I ran moderated usability sessions with six estate managers and simplified the route visualisation screen based on confusion observed during those sessions." },
+];
+
+const dpFacilityBill = [
+  { phase: "Discovery", description: "I interviewed fifteen estate residents about their utility payment habits and audited the existing manual billing workflows used by estate managers to understand the status quo." },
+  { phase: "Define", description: "The core problem was fragmented, cash-based utility payments spread across multiple channels. I also worked with finance stakeholders to define the micro-loan eligibility and repayment rules." },
+  { phase: "Design", description: "I designed a unified dashboard covering electricity, DSTV, internet, and the loan product — including the full loan application and repayment tracker flows." },
+  { phase: "Launch & Measure", description: "After launch I tracked bill-payment completion rates and used analytics to identify and remove friction in the loan application flow, reducing drop-off by 30%." },
+];
+
+const dpELS = [
+  { phase: "Discovery", description: "I conducted a competitive audit across Uber Black, Bolt Business, and local operators, and interviewed ten executives on what they expect from a premium ride service." },
+  { phase: "Brand & Design Language", description: "I established a dark, minimal visual identity to reflect the luxury positioning and defined a set of motion and interaction principles to ensure every touchpoint felt premium." },
+  { phase: "Design", description: "I optimised the core booking flow to a 3-tap confirmation and designed driver onboarding, vehicle selection, and live-tracking screens with the same premium feel." },
+  { phase: "Test & Iterate", description: "I conducted prototype testing sessions with five target users and refined the booking confirmation screen after usability findings revealed hesitation at the payment step." },
+];
+
+const dpBuzzMap = [
+  { phase: "Discovery", description: "I surveyed fifty young adults on how they discover local events and mapped their key frustrations with existing platforms like Eventbrite and Facebook Events." },
+  { phase: "User Flows", description: "I designed the map-first discovery, RSVP, and event-creation flows — treating the host and attendee journeys as separate products with their own goals and entry points." },
+  { phase: "Design", description: "I built an interactive map UI with event clustering and filter layers for attendees, alongside a host dashboard for promotion management and attendance tracking." },
+  { phase: "Launch & Measure", description: "Post-launch I monitored event discovery rate and RSVP conversion, then iterated on the map clustering algorithm after density complaints surfaced during the beta." },
 ];
 
 // ── Featured projects — shown by default ──────────────────────────────────────
@@ -68,7 +92,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/th5Pijmqf0prdP8Eu6kuGr/Hogo-Ride?node-id=623-2317&t=DqvoR2mZuNaSe6wD-1",
     },
-    designProcess,
+    designProcess: dpHugoRide,
     images: [
       "/hugo-ride.png",
       "/hugo-ride-gallery-2.png",
@@ -98,7 +122,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/4eTlVwTkZJUpZQqLQ9VEZD/Celoxx?node-id=110-2508&m=dev",
     },
-    designProcess,
+    designProcess: dpCeloxx,
     images: [
       "/Celoxx-Image 1.png",
       "/Celoxx-Image 2.png",
@@ -129,7 +153,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/Os5d80oYW9g39CSJMuQWQb/Priceet-Design?node-id=1-5&t=nBJfEfHOvTzqxU9a-1",
     },
-    designProcess,
+    designProcess: dpPriceet,
     images: [
       "/Priceet Image 1.png",
       "/Priceet image 2.png",
@@ -160,7 +184,7 @@ const featuredProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/RAX8E2J9Kj7CweCsKO66Pc/Lacarte?node-id=7-2965&t=SOyxoh2NEs7yh2td-1",
     },
-    designProcess,
+    designProcess: dpLacrate,
     images: [
       "/Lacarte image 1.png",
       "/Lacarte image 2.png",
@@ -196,7 +220,7 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.facilitybill&hl=en",
     },
-    designProcess,
+    designProcess: dpFacilityBill,
     images: [
       "/FacilityBill-Image 1.png",
       "/FacilityBill-Image 2.png",
@@ -226,7 +250,7 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       figma: "https://www.figma.com/design/GpAuYiHO7o9MBr0rNHRG11/Els?node-id=1-3&t=1jmZUlfWMHgiZjjw-1",
     },
-    designProcess,
+    designProcess: dpELS,
     images: [
       "/ELS-Image1.png",
       "/ELS-Image 2.png",
@@ -257,7 +281,7 @@ const additionalProjects: ProjectDetail[] = [
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.nodescale.buzzmap",
     },
-    designProcess,
+    designProcess: dpBuzzMap,
     images: [
       "/BuzzMap-Image.png",
       "/BuzzMap-Image 1.png",

@@ -33,7 +33,7 @@ export interface ProjectDetail {
   timeline: string;
   techStack: string[];
   outcomes: string[];
-  designProcess?: { phase: string; items: string[] }[];
+  designProcess?: { phase: string; description: string }[];
   links: {
     figma?: string;
     github?: string;
@@ -449,27 +449,28 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                           className="absolute top-5 left-0 right-0 h-px hidden md:block"
                           style={{ backgroundColor: `${project.color}20` }}
                         />
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                           {project.designProcess.map((step, i) => (
                             <motion.div
                               key={step.phase}
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.4, delay: i * 0.08 }}
-                              className="relative flex flex-col"
+                              className="relative flex flex-col border border-border bg-background p-5 group hover:border-opacity-60 transition-all duration-300"
                             >
-                              {/* Phase number node */}
-                              <div className="flex items-center gap-3 mb-4 md:flex-col md:items-start md:gap-0">
-                                <div
-                                  className="relative z-10 flex-shrink-0 w-10 h-10 border-2 flex items-center justify-center text-xs font-mono font-semibold md:mb-3"
-                                  style={{
-                                    borderColor: project.color,
-                                    color: project.color,
-                                    backgroundColor: `${project.color}10`,
-                                  }}
+                              {/* Top accent line */}
+                              <div
+                                className="absolute top-0 left-0 right-0 h-[2px]"
+                                style={{ backgroundColor: `${project.color}50` }}
+                              />
+                              {/* Phase number + label */}
+                              <div className="flex items-center gap-3 mb-3">
+                                <span
+                                  className="text-[10px] font-mono font-semibold w-6 h-6 flex items-center justify-center border flex-shrink-0"
+                                  style={{ borderColor: `${project.color}60`, color: project.color }}
                                 >
                                   {String(i + 1).padStart(2, "0")}
-                                </div>
+                                </span>
                                 <h4
                                   className="text-xs font-semibold tracking-[0.1em] uppercase"
                                   style={{ color: project.color }}
@@ -477,21 +478,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                   {step.phase}
                                 </h4>
                               </div>
-                              {/* Items */}
-                              <ul className="space-y-1.5 md:pl-0">
-                                {step.items.map((item) => (
-                                  <li
-                                    key={item}
-                                    className="flex items-start gap-1.5 text-[11px] text-muted leading-snug"
-                                  >
-                                    <span
-                                      className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0"
-                                      style={{ backgroundColor: `${project.color}60` }}
-                                    />
-                                    {item}
-                                  </li>
-                                ))}
-                              </ul>
+                              {/* Description */}
+                              <p className="text-xs text-muted leading-relaxed">
+                                {step.description}
+                              </p>
                             </motion.div>
                           ))}
                         </div>
