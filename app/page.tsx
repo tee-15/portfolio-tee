@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Palette,
-  Users,
+  Code2,
   Smartphone,
   Lightbulb,
 } from "lucide-react";
@@ -14,6 +14,9 @@ import Work from "./components/Work";
 import ContactModal from "./components/ContactModal";
 import GlobalEffects from "./components/GlobalEffects";
 import CustomCursor from "./components/CustomCursor";
+import CountUp from "./components/CountUp";
+import Magnetic from "./components/Magnetic";
+import BreakoutGame from "./components/BreakoutGame";
 import {
   GlowOrb,
   FloatingRing,
@@ -54,35 +57,35 @@ function AboutSection() {
   } = useMouseParallax({ intensity: 20 });
 
   const stats = [
-    { value: "8+",  label: "Years of Experience",  sub: "FinTech, SaaS, Enterprise & EdTech",  color: "#c45c3e" },
-    { value: "50+", label: "Projects Delivered",    sub: "End-to-end, on time & on scope",       color: "#d4a574" },
+    { value: 8,  suffix: "+", label: "Years of Experience",  sub: "FinTech, SaaS, Enterprise & EdTech",  color: "#c45c3e" },
+    { value: 50, suffix: "+", label: "Products Shipped",      sub: "Designed & built for web and mobile",  color: "#d4a574" },
   ];
 
   const competencies = [
     {
-      label: "Product Strategy & Execution",
+      label: "Frontend Development",
       color: "#c45c3e",
-      items: ["Product Vision & Roadmap", "GTM Strategy", "Product-Market Fit", "Feature Prioritization (MoSCoW)", "PRD Authoring", "Release Planning"],
+      items: ["React & Next.js", "TypeScript", "Responsive & Accessible UI", "State Management", "REST & GraphQL APIs", "Performance Optimization"],
     },
     {
-      label: "Analytics & Metrics",
+      label: "Mobile Development",
       color: "#d4a574",
-      items: ["KPIs & OKRs", "A/B Testing", "Conversion Rate Optimization", "Churn Reduction", "Data-Driven Decision Making", "Mixpanel · Amplitude · Tableau"],
+      items: ["React Native & Expo", "iOS & Android", "Cross-Platform UI", "Navigation & Routing", "Push Notifications", "App Store Deployment"],
     },
     {
-      label: "Agile & Collaboration",
+      label: "UI Engineering",
       color: "#5a9e8f",
-      items: ["Agile / Scrum / Kanban", "Sprint Planning", "Cross-Functional Leadership", "Stakeholder Management", "Jira · Confluence · Notion"],
+      items: ["Design Systems", "Component Libraries", "Tailwind CSS", "Framer Motion & Animation", "Accessibility (WCAG)", "Cross-Browser Testing"],
     },
     {
-      label: "User Research & Design",
+      label: "Product & UX Design",
       color: "#8a6fc7",
-      items: ["User-Centered Design", "Customer Journey Mapping", "Usability Testing", "Wireframing & Prototyping", "Design Systems", "Figma · Adobe XD · InVision"],
+      items: ["User-Centered Design", "Wireframing & Prototyping", "Usability Testing", "Customer Journey Mapping", "Interaction Design", "Figma · Adobe XD"],
     },
     {
-      label: "Leadership & Operations",
+      label: "Quality & Workflow",
       color: "#c45c3e",
-      items: ["Team Leadership & Mentoring", "Resource Allocation", "Timeline Management", "Risk Mitigation", "Workshop Facilitation", "Strategic Planning"],
+      items: ["Clean, Maintainable Code", "Git & Version Control", "Code Reviews", "Cross-Functional Collaboration", "Responsive Testing", "Technical Documentation"],
     },
   ];
 
@@ -107,54 +110,33 @@ function AboutSection() {
       ],
     },
     {
-      label: "Product & Project Mgmt",
+      label: "Frontend",
       color: "#5a9e8f",
       tools: [
-        { name: "Jira",       icon: "https://cdn.simpleicons.org/jira/ffffff" },
-        { name: "Confluence", icon: "https://cdn.simpleicons.org/confluence/ffffff" },
-        { name: "Notion",     icon: "https://cdn.simpleicons.org/notion/ffffff" },
-        {
-          name: "Slack",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23E01E5A' d='M6 15a2 2 0 1 1 0-4h2v2a2 2 0 0 1-2 2z'/><path fill='%2336C5F0' d='M9 6a2 2 0 1 1 4 0v2H9V6z'/><path fill='%232EB67D' d='M18 9a2 2 0 1 1 0 4h-2V9h2z'/><path fill='%23ECB22E' d='M15 18a2 2 0 1 1-4 0v-2h4v2z'/><path fill='%2336C5F0' d='M6 9h6v6H6z' opacity='.15'/><path fill='%23E01E5A' d='M9 6h2v6H9z'/><path fill='%232EB67D' d='M13 9h2v6h-2z'/><path fill='%23ECB22E' d='M9 13h6v2H9z'/></svg>`,
-        },
+        { name: "React",        icon: "https://cdn.simpleicons.org/react/ffffff" },
+        { name: "Next.js",      icon: "https://cdn.simpleicons.org/nextdotjs/ffffff" },
+        { name: "TypeScript",   icon: "https://cdn.simpleicons.org/typescript/ffffff" },
+        { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss/ffffff" },
       ],
     },
     {
-      label: "Analytics",
+      label: "Mobile",
       color: "#d4a574",
       tools: [
-        { name: "Mixpanel",  icon: "https://cdn.simpleicons.org/mixpanel/ffffff" },
-        {
-          name: "Amplitude",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 2L2 19.5h4.5L12 9l5.5 10.5H22L12 2z' fill='white'/><path d='M7.5 19.5h9l-4.5-8.5-4.5 8.5z' fill='white' opacity='0.4'/></svg>`,
-        },
-        {
-          name: "Tableau",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M11.14 4.588V0h1.72v4.588h4.588v1.72h-4.588V10.9h-1.72V6.308H6.552v-1.72h4.588zm6.862 8.274v-3.45h1.376v3.45H23v1.376h-3.608v3.45h-1.376v-3.45H14.41v-1.376h3.592zM6.552 14.24V10.9H7.93v3.34H11.27v1.376H7.93v3.34H6.552v-3.34H3.21V14.24h3.342zM0 19.412v-3.45h1.376v3.45H4.07v1.376H1.376V24H0v-3.212h-2.694v-1.376H0z'/></svg>`,
-        },
-        { name: "GitHub",    icon: "https://cdn.simpleicons.org/github/ffffff" },
+        { name: "React Native", icon: "https://cdn.simpleicons.org/react/ffffff" },
+        { name: "Expo",         icon: "https://cdn.simpleicons.org/expo/ffffff" },
+        { name: "Android",      icon: "https://cdn.simpleicons.org/android/ffffff" },
+        { name: "iOS",          icon: "https://cdn.simpleicons.org/apple/ffffff" },
       ],
     },
     {
-      label: "Office & Collaboration",
+      label: "Tools & Workflow",
       color: "#8a6fc7",
       tools: [
-        {
-          name: "MS Word",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%232B579A' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%232B579A' d='M11 8l1.5 5 1.5-4 1.5 4 1.5-5h1l-2 7h-1l-1.5-4-1.5 4h-1l-2-7z'/></svg>`,
-        },
-        {
-          name: "MS Excel",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23217346' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%23217346' d='M11 8l2 3-2 3h1.5l1.25-2 1.25 2H14.5l-2-3 2-3H13l-1.25 2L10.5 8z'/></svg>`,
-        },
-        {
-          name: "PowerPoint",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23B7472A' d='M23.5 2H8.5A.5.5 0 0 0 8 2.5v3H0v14h8v2.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z'/><path fill='white' d='M9 6h13v12H9z'/><path fill='%23B7472A' d='M11 8h3c1.1 0 2 .9 2 2s-.9 2-2 2h-1.5v2H11V8zm1.5 3H14c.55 0 1-.45 1-1s-.45-1-1-1h-1.5v2z'/></svg>`,
-        },
-        {
-          name: "MS Teams",
-          icon: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%235059C9' d='M14.5 9A2.5 2.5 0 1 0 14.5 4a2.5 2.5 0 0 0 0 5zm3.5 1h4a1 1 0 0 1 1 1v5a3 3 0 0 1-3 3 3 3 0 0 1-3-3v-5.5a.5.5 0 0 1 .5-.5H18z'/><path fill='%237B83EB' d='M9.5 10A3.5 3.5 0 1 0 9.5 3a3.5 3.5 0 0 0 0 7z'/><path fill='%234B53BC' d='M15 11H4a1 1 0 0 0-1 1v6a5 5 0 0 0 10 0v-6a1 1 0 0 0-1-1z'/><path fill='white' opacity='.5' d='M9.5 12v7'/></svg>`,
-        },
+        { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/ffffff" },
+        { name: "VS Code", icon: "https://cdn.simpleicons.org/visualstudiocode/ffffff" },
+        { name: "Git",     icon: "https://cdn.simpleicons.org/git/ffffff" },
+        { name: "GitHub",  icon: "https://cdn.simpleicons.org/github/ffffff" },
       ],
     },
   ];
@@ -189,9 +171,9 @@ function AboutSection() {
             About Me
           </motion.span>
           <motion.h2 variants={fadeInUp} className="text-4xl lg:text-6xl font-light tracking-tight max-w-4xl">
-            Where strategy meets
+            Where design meets
             <br />
-            <span className="font-semibold gradient-text">design and delivery</span>
+            <span className="font-semibold gradient-text">code and craft</span>
           </motion.h2>
         </motion.div>
 
@@ -206,13 +188,13 @@ function AboutSection() {
             className="space-y-6"
           >
             <motion.p variants={fadeInUp} className="text-foreground/90 text-xl leading-relaxed font-light">
-              Results-driven Product Designer and Product Manager with 8+ years of experience delivering digital products across FinTech, SaaS, enterprise, and education-adjacent sectors.
+              Product Designer and Frontend Developer with 8+ years of experience crafting digital products across FinTech, SaaS, enterprise, and education-adjacent sectors.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-muted text-base leading-relaxed">
-              I have a proven track record of owning end-to-end Product Strategy & Execution — from defining Product Vision & Roadmap and authoring PRDs, to driving Go-To-Market strategy and achieving Product-Market Fit. Expert in Feature Prioritization using MoSCoW frameworks, Agile / Scrum delivery, and Cross-Functional Leadership.
+              I own the full product journey — from user research, wireframing, and high-fidelity UI/UX design to building responsive, accessible web and mobile applications with React, Next.js, and React Native.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-muted text-base leading-relaxed">
-              Passionate about User-Centered Design, I conduct User Research, Customer Journey Mapping, and Usability Testing to transform complex requirements into intuitive, high-impact digital experiences. Demonstrated success in Stakeholder Management, defining KPIs & OKRs, and leveraging A/B Testing and data analytics to optimize Conversion Rates and reduce Churn — operating across both commercial product and social impact dimensions.
+              Passionate about User-Centered Design and clean, performant code, I turn complex requirements into intuitive interfaces and ship them to production — building design systems and component libraries that bridge the gap between Figma and real, working products.
             </motion.p>
             <motion.div variants={fadeInUp} className="pt-2">
               <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-3">Sectors</p>
@@ -237,7 +219,9 @@ function AboutSection() {
             <CornerBrackets className="inset-0" />
             {stats.map((s, i) => (
               <div key={s.label} className={`p-8 ${i < stats.length - 1 ? "border-b border-border" : ""} hover:bg-surface/50 transition-colors duration-300`}>
-                <span className="text-6xl font-light leading-none block mb-2" style={{ color: s.color }}>{s.value}</span>
+                <span className="text-6xl font-light leading-none block mb-2" style={{ color: s.color }}>
+                  <CountUp value={s.value} suffix={s.suffix} />
+                </span>
                 <p className="text-sm font-medium text-foreground mb-1">{s.label}</p>
                 <p className="text-xs text-muted">{s.sub}</p>
               </div>
@@ -294,7 +278,7 @@ function AboutSection() {
               <div>
                 <p className="text-[10px] tracking-[0.2em] uppercase text-accent font-medium mb-3">Currently Available</p>
                 <p className="text-sm text-foreground/80 leading-relaxed">
-                  Open to product design, product management, and consulting engagements across FinTech, SaaS, and enterprise.
+                  Open to product design, web, and mobile development engagements across FinTech, SaaS, and enterprise.
                 </p>
               </div>
               <div className="mt-6 flex items-center gap-2">
@@ -390,17 +374,17 @@ function ServicesSection() {
       borderHover: "hover:border-accent",
     },
     {
-      title: "Project Management",
+      title: "Web Development",
       description:
-        "Leading cross-functional teams with agile methodologies to deliver projects on time, within scope, and above expectations.",
-      icon: Users,
+        "Building fast, responsive, and accessible web applications with React and Next.js — from marketing sites to complex SaaS dashboards.",
+      icon: Code2,
       color: "text-accent-secondary",
       borderHover: "hover:border-accent-secondary",
     },
     {
-      title: "Mobile App Development",
+      title: "Mobile Development",
       description:
-        "Building performant, intuitive mobile applications for iOS and Android that users love and businesses rely on.",
+        "Crafting performant, intuitive cross-platform mobile apps for iOS and Android with React Native that users love and businesses rely on.",
       icon: Smartphone,
       color: "text-accent-tertiary",
       borderHover: "hover:border-accent-tertiary",
@@ -408,7 +392,7 @@ function ServicesSection() {
     {
       title: "Consultation",
       description:
-        "Strategic guidance on product direction, UX audits, process optimization, and digital transformation initiatives.",
+        "Strategic guidance on product direction, UX audits, frontend architecture, and design-to-code workflows.",
       icon: Lightbulb,
       color: "text-accent",
       borderHover: "hover:border-accent",
@@ -486,6 +470,68 @@ function ServicesSection() {
   );
 }
 
+function PlaygroundSection() {
+  const {
+    ref,
+    mouseX,
+    mouseY,
+    handleMouseMove,
+    handleMouseLeave,
+  } = useMouseParallax({ intensity: 18 });
+
+  return (
+    <section
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      id="playground"
+      className="relative py-32 px-6 lg:px-8 overflow-hidden"
+    >
+      <SectionNumber number="03" className="top-8 left-8 md:left-20" />
+      <DottedGrid className="inset-0 w-full h-full" />
+      <GlowOrb mouseX={mouseX} mouseY={mouseY} color="accent-secondary" size={340} intensity={12} className="top-10 right-0" />
+      <FloatingRing mouseX={mouseX} mouseY={mouseY} intensity={20} size={90} className="bottom-24 left-16" />
+      <FloatingDot mouseX={mouseX} mouseY={mouseY} intensity={26} size={8} className="top-32 right-24" />
+      <FloatingPlus mouseX={mouseX} mouseY={mouseY} intensity={16} className="bottom-40 right-40" />
+      <DiagonalLine className="top-24 left-24" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Copy */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.span variants={fadeInUp} className="text-accent text-sm tracking-[0.2em] uppercase font-medium mb-4 block">
+              Playground
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className="text-4xl lg:text-5xl font-light tracking-tight">
+              Breakout — <span className="font-medium gradient-text">smash the stack</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-muted text-lg mt-6 leading-relaxed">
+              A canvas arcade built with React and the HTML5 Canvas API — bounce the ball, break every tech brick, catch power-ups, and chase a high score. No game engine, just requestAnimationFrame and math.
+            </motion.p>
+          </motion.div>
+
+          {/* Small framed "cabinet" panel */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative w-full max-w-sm mx-auto border border-border bg-surface p-4 group"
+          >
+            <CornerBrackets className="inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <BreakoutGame />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactSection({ onOpen }: { onOpen: () => void }) {
   const {
     ref,
@@ -503,7 +549,7 @@ function ContactSection({ onOpen }: { onOpen: () => void }) {
       id="contact"
       className="relative py-32 px-6 lg:px-8 bg-surface overflow-hidden"
     >
-      <SectionNumber number="03" className="bottom-8 right-8 md:right-20" />
+      <SectionNumber number="04" className="bottom-8 right-8 md:right-20" />
       <DottedGrid className="inset-0 w-full h-full" />
       <GlowOrb mouseX={mouseX} mouseY={mouseY} color="accent" size={400} intensity={14} className="-bottom-32 -left-32" />
       <FloatingRing mouseX={mouseX} mouseY={mouseY} intensity={24} size={70} className="top-24 left-24" />
@@ -540,14 +586,16 @@ function ContactSection({ onOpen }: { onOpen: () => void }) {
           discuss how we can work together.
         </motion.p>
         <motion.div variants={fadeInUp}>
-          <motion.button
-            onClick={onOpen}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-background px-10 py-5 text-sm font-medium tracking-wide transition-colors duration-300"
-          >
-            Get in Touch
-          </motion.button>
+          <Magnetic className="inline-block" strength={0.4}>
+            <motion.button
+              onClick={onOpen}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-background px-10 py-5 text-sm font-medium tracking-wide transition-colors duration-300"
+            >
+              Get in Touch
+            </motion.button>
+          </Magnetic>
         </motion.div>
       </motion.div>
     </section>
@@ -568,6 +616,7 @@ export default function Home() {
 
       <AboutSection />
       <ServicesSection />
+      <PlaygroundSection />
       <ContactSection onOpen={() => setIsModalOpen(true)} />
 
       {/* Footer */}

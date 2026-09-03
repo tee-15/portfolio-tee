@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import Link from "next/link";
 
-const RESUME_PATH = "/Temitope-Williams-Resume.pdf"; // ← update filename if different
+const RESUME_PATH = "/Temitope_Williams_CV_Product_Design.pdf";
 
 const navItems = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Playground", href: "#playground" },
   { label: "Contact", href: "#contact" },
 ];
 

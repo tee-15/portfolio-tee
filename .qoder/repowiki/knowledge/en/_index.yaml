@@ -1,0 +1,35 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: en-US
+branch: main
+nodes_managed: true
+exported_at: "2026-09-03T10:46:45Z"
+modules:
+    "":
+        dir_name: Portfolio Website (Next.js App Router)
+        title: Portfolio Website (Next.js App Router)
+        scope:
+            - README.md
+            - .gitignore
+            - package.json
+            - next.config.ts
+            - tsconfig.json
+            - eslint.config.mjs
+            - postcss.config.mjs
+            - package-lock.json
+            - .kiro/
+            - LIGHTBOX_FEATURE.md
+        source_files: []
+        children:
+            - app
+        depends_on: []
+        related_to: []
+    app:
+        dir_name: Portfolio Website (Next.js App Router)
+        title: Portfolio Website (Next.js App Router)
+        scope:
+            - app/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []

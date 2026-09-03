@@ -1,0 +1,3 @@
+- Absolute imports use the `@/*` path alias configured in `tsconfig.json` instead of relative paths.
+- Styling composes Tailwind utility classes through `clsx` and `tailwind-merge` rather than raw string concatenation.
+- Animations are implemented declaratively with Framer Motion components inside React components.

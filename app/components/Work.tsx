@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { useMouseParallax } from "../hooks/useMouseParallax";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import ProjectModal, { type ProjectDetail } from "./ProjectModal";
 import {
   SectionNumber,
@@ -141,7 +143,7 @@ const featuredProjects: ProjectDetail[] = [
     year: "2026",
     color: "#5a9e8f",
     tag: "Full Stack",
-    role: "Project Manager & Lead Developer",
+    role: "Lead Frontend Developer",
     timeline: "8 months",
     techStack: ["React", "Next.js", "Node.js", "MongoDB", "Redis"],
     outcomes: [
@@ -269,7 +271,7 @@ const additionalProjects: ProjectDetail[] = [
     year: "2025",
     color: "#8a6fc7",
     tag: "Product Design",
-    role: "Product Designer & Product Manager",
+    role: "Product Designer & Frontend Developer",
     timeline: "6 months",
     techStack: ["React Native", "Next.js", "Google Maps API", "Node.js", "MongoDB"],
     outcomes: [
@@ -297,10 +299,16 @@ function ProjectCard({
   project,
   index,
   onClick,
+  onHoverStart,
+  onHoverEnd,
+  onPreviewMove,
 }: {
   project: ProjectDetail;
   index: number;
   onClick: () => void;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
+  onPreviewMove: (e: React.MouseEvent) => void;
 }) {
   return (
     <motion.div
@@ -310,6 +318,9 @@ function ProjectCard({
       transition={{ duration: 0.6, delay: Math.min(index * 0.1, 0.4) }}
       className="group cursor-pointer"
       onClick={onClick}
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      onMouseMove={onPreviewMove}
     >
       <div className="grid lg:grid-cols-[1fr_2fr_1fr] gap-6 lg:gap-12 items-start py-10 border-b border-border hover:bg-surface/50 transition-colors duration-500 px-4 -mx-4 relative">
         {/* Accent line */}
@@ -353,6 +364,18 @@ export default function Work() {
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<ProjectDetail | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Cursor-following image preview (desktop hover)
+  const previewX = useMotionValue(0);
+  const previewY = useMotionValue(0);
+  const smoothX = useSpring(previewX, { damping: 30, stiffness: 200, mass: 0.5 });
+  const smoothY = useSpring(previewY, { damping: 30, stiffness: 200, mass: 0.5 });
+  const handlePreviewMove = (e: React.MouseEvent) => {
+    previewX.set(e.clientX);
+    previewY.set(e.clientY);
+  };
 
   const handleOpenProject = (project: ProjectDetail) => {
     setSelectedProject(project);
@@ -428,6 +451,9 @@ export default function Work() {
               project={project}
               index={index}
               onClick={() => handleOpenProject(project)}
+              onHoverStart={() => setHoveredProject(project)}
+              onHoverEnd={() => setHoveredProject(null)}
+              onPreviewMove={handlePreviewMove}
             />
           ))}
 
@@ -446,6 +472,9 @@ export default function Work() {
                   project={project}
                   index={featuredProjects.length + index}
                   onClick={() => handleOpenProject(project)}
+                  onHoverStart={() => setHoveredProject(project)}
+                  onHoverEnd={() => setHoveredProject(null)}
+                  onPreviewMove={handlePreviewMove}
                 />
               </motion.div>
             ))}
@@ -487,6 +516,49 @@ export default function Work() {
           </motion.div>
         )}
       </div>
+
+      {/* Cursor-following image preview — desktop hover only */}
+      <AnimatePresence>
+        {hoveredProject && hoveredProject.images.length > 0 && !prefersReducedMotion && (
+          <motion.div
+            key="work-hover-preview"
+            className="fixed z-30 hidden md:block pointer-events-none"
+            style={{ x: smoothX, y: smoothY, translateX: "-50%", translateY: "-50%" }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            aria-hidden="true"
+          >
+            <div className="relative w-[18rem] aspect-[16/10] border border-border bg-surface shadow-2xl overflow-hidden">
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px] z-10"
+                style={{ backgroundColor: hoveredProject.color }}
+              />
+              <Image
+                key={hoveredProject.id}
+                src={hoveredProject.images[0]}
+                alt=""
+                fill
+                sizes="288px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center justify-between gap-3">
+                <span className="text-xs text-foreground font-medium truncate">
+                  {hoveredProject.title}
+                </span>
+                <span
+                  className="text-[10px] uppercase tracking-[0.15em] flex items-center gap-1 shrink-0"
+                  style={{ color: hoveredProject.color }}
+                >
+                  View <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <ProjectModal
         project={selectedProject}

@@ -1,0 +1,1 @@
+Client-rendered Next.js portfolio site for a product designer/manager, featuring animated hero, work showcase, about/services sections, and an EmailJS-powered contact modal.

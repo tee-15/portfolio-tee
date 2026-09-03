@@ -2,12 +2,12 @@
 
 ## What is this?
 
-A modern, interactive portfolio website for Temitope Williams—a product designer and project manager showcasing their work, services, and expertise.
+A modern, interactive portfolio website for Temitope Williams—a product designer and frontend developer showcasing their work, services, and expertise.
 
 ## Core Purpose
 
 - Showcase professional work and projects
-- Highlight services: product design, project management, mobile app development, and consultation
+- Highlight services: product design, web development, mobile development, and consultation
 - Enable potential clients to get in touch
 - Demonstrate design and technical excellence through the portfolio itself
 
@@ -30,4 +30,4 @@ A modern, interactive portfolio website for Temitope Williams—a product design
 
 ## Target Audience
 
-Potential clients and collaborators looking to hire a product designer or project manager.
+Potential clients and collaborators looking to hire a product designer or frontend developer.

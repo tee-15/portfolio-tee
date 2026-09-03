@@ -1,0 +1,1 @@
+Next.js 16 + React 19 on the App Router, Tailwind CSS v4 via `@tailwindcss/postcss`, Framer Motion for animations, Lucide icons, clsx/tailwind-merge for class composition, and @emailjs/browser for client-side email delivery.

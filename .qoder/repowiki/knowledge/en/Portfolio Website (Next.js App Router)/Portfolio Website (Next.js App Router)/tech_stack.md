@@ -1,0 +1,1 @@
+Next.js App Router with React Server Components disabled per page (`"use client"`), Framer Motion for spring-based parallax and scroll-triggered animations, Tailwind CSS via custom design tokens (accent colors, surface/background), Lucide React icons, EmailJS browser SDK for contact form delivery, and Google Fonts loaded via `next/font`.

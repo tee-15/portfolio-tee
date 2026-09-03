@@ -1,0 +1,1 @@
+`npm run dev` starts the development server, `npm run build` produces a static export, `npm run start` serves the built output, and `npm run lint` runs ESLint using the shared `eslint.config.mjs`.

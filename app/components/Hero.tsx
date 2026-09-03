@@ -6,6 +6,7 @@ import { useMouseParallax, useMouseParallaxValue } from "../hooks/useMouseParall
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import Image from "next/image";
 import { CornerBrackets, DottedGrid } from "./Decorations";
+import Magnetic from "./Magnetic";
 
 export default function Hero() {
   const {
@@ -37,7 +38,7 @@ export default function Hero() {
       ref={heroRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-6 pt-28 lg:px-8 lg:pt-36 overflow-hidden"
     >
       <DottedGrid className="inset-0 w-full h-full" />
 
@@ -82,22 +83,35 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="inline-block text-accent text-sm tracking-[0.2em] uppercase font-medium mb-6">
-                Product Designer · Product Manager · Strategist
+                Product Designer · Frontend Developer · Web & Mobile
               </span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[0.95] mb-8"
-            >
-              Turning
-              <br />
-              <span className="font-medium gradient-text">Vision</span>
-              <br />
-              <span className="font-medium">into Product</span>
-            </motion.h1>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[0.95] mb-8">
+              {[
+                { text: "Turning", className: "" },
+                { text: "Vision", className: "font-medium gradient-text" },
+                { text: "into Product", className: "font-medium" },
+              ].map((line, i) => (
+                <span
+                  key={line.text}
+                  className="block overflow-hidden pb-[0.08em] -mb-[0.08em]"
+                >
+                  <motion.span
+                    className={`block ${line.className}`}
+                    initial={prefersReducedMotion ? { y: 0 } : { y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.4 + i * 0.12,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    {line.text}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -105,7 +119,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-muted text-lg lg:text-xl max-w-md leading-relaxed mb-10"
             >
-              8+ years delivering end-to-end digital products across FinTech, SaaS, and enterprise — from product strategy and roadmapping to high-fidelity design and cross-functional delivery.
+              8+ years designing and building digital products across FinTech, SaaS, and enterprise — from high-fidelity UI/UX design to production-ready web and mobile apps.
             </motion.p>
 
             <motion.div
@@ -114,13 +128,15 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex items-center gap-6"
             >
-              <a
-                href="#work"
-                className="group inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-background px-8 py-4 text-sm font-medium tracking-wide transition-colors duration-300"
-              >
-                View Work
-                <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-              </a>
+              <Magnetic className="inline-block">
+                <a
+                  href="#work"
+                  className="group inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-background px-8 py-4 text-sm font-medium tracking-wide transition-colors duration-300"
+                >
+                  View Work
+                  <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                </a>
+              </Magnetic>
               <a
                 href="#contact"
                 className="text-sm text-muted hover:text-foreground transition-colors duration-300 tracking-wide border-b border-border hover:border-foreground pb-1"
@@ -147,7 +163,7 @@ export default function Hero() {
               >
                 <Image
                   src="/cartoon-woman-wearing-glasses.jpg"
-                  alt="Temitope Williams - Product Designer & Project Manager"
+                  alt="Temitope Williams - Product Designer & Frontend Developer"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                   className="object-cover"

@@ -1,19 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
+
+const QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribe(onStoreChange: () => void) {
+  const mediaQuery = window.matchMedia(QUERY);
+  mediaQuery.addEventListener("change", onStoreChange);
+  return () => mediaQuery.removeEventListener("change", onStoreChange);
+}
+
+function getSnapshot() {
+  return window.matchMedia(QUERY).matches;
+}
+
+// During SSR and hydration the client must match the server output, so we
+// report `false` first and let React re-read the real value after commit.
+// This avoids hydration mismatches for consumers that branch render output
+// on the reduced-motion preference.
+function getServerSnapshot() {
+  return false;
+}
 
 export function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-  return prefersReducedMotion;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
