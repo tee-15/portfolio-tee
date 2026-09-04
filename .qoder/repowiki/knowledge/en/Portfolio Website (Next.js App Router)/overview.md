@@ -1,1 +1,0 @@
-Single Next.js 16 portfolio application that renders a product designer's site with animated sections, work showcase, and EmailJS contact form.

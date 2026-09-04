@@ -1,0 +1,1 @@
+Single Next.js App Router application that renders a product designer's portfolio with animated sections, work showcase, and EmailJS contact form.

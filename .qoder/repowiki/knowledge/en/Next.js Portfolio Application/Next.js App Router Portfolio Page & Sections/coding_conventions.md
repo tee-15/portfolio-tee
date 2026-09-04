@@ -1,0 +1,6 @@
+- Every interactive component or hook file begins with the `"use client"` directive so it can use React hooks, event listeners, and Framer Motion.
+- Each section follows a uniform structure: a `<section>` element bound to `useMouseParallax`, a full-bleed `DottedGrid` background, one or more `GlowOrb`/`FloatingRing`/`FloatingDot`/`FloatingPlus` decorations positioned absolutely with varying `intensity` values, and a `SectionNumber` badge.
+- Scroll-triggered animations wrap content in `motion.div` elements using shared `fadeInUp` and `staggerContainer` variants with `initial="hidden"`, `whileInView="visible"`, and `viewport={{ once: true, margin }}`.
+- Mouse-driven parallax is applied by passing `mouseX`/`mouseY` through `useMouseParallaxValue` with positive/negative `intensity` values to create layered depth on decorative elements.
+- External API keys and email addresses are kept in `config/emailjs.ts` as `as const` exports rather than inline literals, keeping UI components free of environment-specific strings.
+- Accessibility is handled by reading `useReducedMotion()` and conditionally disabling infinite motion loops when reduced motion is preferred.

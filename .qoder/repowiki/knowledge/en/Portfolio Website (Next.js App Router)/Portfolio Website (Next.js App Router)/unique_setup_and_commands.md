@@ -1,1 +1,0 @@
-The contact form requires EmailJS credentials — `config/emailjs.ts` must be filled with a real `SERVICE_ID`, `PUBLIC_KEY`, and both `TEMPLATE_ID` (auto-reply) and `NOTIFY_TEMPLATE_ID` (owner notification); without a valid notify template the notification fires-and-forgets but does not block success.

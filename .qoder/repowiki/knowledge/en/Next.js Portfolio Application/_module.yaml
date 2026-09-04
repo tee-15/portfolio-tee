@@ -1,6 +1,6 @@
 schema_version: 1
 module_path: ""
-title: Portfolio Website (Next.js App Router)
+title: Next.js Portfolio Application
 scope:
     - README.md
     - .gitignore

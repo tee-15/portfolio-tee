@@ -1,6 +1,0 @@
-- Every interactive component is marked with the `"use client"` directive at the top of the file so it can use hooks, event listeners, and Framer Motion.
-- Sections share a uniform structure: a wrapper `<section>` with a `ref` bound to `useMouseParallax`, a full-bleed `DottedGrid` background, one or more `GlowOrb`/`FloatingRing`/`FloatingDot`/`FloatingPlus` decorations positioned absolutely, and a `SectionNumber` badge.
-- Scroll-triggered animations are implemented by wrapping content in `motion.div` elements using shared `fadeInUp` and `staggerContainer` variants with `initial="hidden"`, `whileInView="visible"`, and `viewport={{ once: true, margin }}`.
-- Mouse-driven parallax is applied by passing `mouseX`/`mouseY` through `useMouseParallaxValue` with varying `intensity` values (positive/negative) to create layered depth effects on decorative elements.
-- External API keys and email addresses are kept in `config/emailjs.ts` as `as const` exports rather than inline literals, keeping the contact form free of environment-specific strings.
-- Accessibility is handled by reading `useReducedMotion()` and conditionally disabling infinite motion loops (e.g., the Hero's bouncing arrow) when reduced motion is preferred.

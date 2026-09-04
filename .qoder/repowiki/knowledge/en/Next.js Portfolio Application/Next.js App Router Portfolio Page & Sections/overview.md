@@ -1,0 +1,1 @@
+Client-rendered Next.js App Router page that composes the single-page portfolio with animated sections, decorative parallax elements, and an EmailJS-powered contact modal.

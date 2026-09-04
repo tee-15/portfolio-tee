@@ -10,6 +10,13 @@
 - [page.tsx](file://app/page.tsx)
 </cite>
 
+## Update Summary
+**Changes Made**
+- Updated useReducedMotion hook implementation to use React's useSyncExternalStore for improved performance and SSR compatibility
+- Enhanced accessibility features with better hydration handling
+- Updated component usage examples to reflect the new hook architecture
+- Added detailed explanation of the external store pattern benefits
+
 ## Table of Contents
 1. Introduction
 2. Project Structure
@@ -24,7 +31,7 @@
 ## Introduction
 This document explains the custom animation hooks that power interactive experiences in the portfolio:
 - useMouseParallax: creates mouse-driven parallax effects with intensity control and spring-based smoothing.
-- useReducedMotion: detects user accessibility preferences to disable or reduce motion for a better experience.
+- useReducedMotion: detects user accessibility preferences using React's useSyncExternalStore for optimal performance and SSR compatibility.
 
 You will learn how these hooks work, how they are used across components, performance techniques applied, configuration options, best practices, and troubleshooting strategies.
 
@@ -52,35 +59,36 @@ URM --> CUR
 
 **Diagram sources**
 - [useMouseParallax.ts:12-45](file://app/hooks/useMouseParallax.ts#L12-L45)
-- [useReducedMotion.ts:5-19](file://app/hooks/useReducedMotion.ts#L5-L19)
-- [Hero.tsx:5-33](file://app/components/Hero.tsx#L5-L33)
+- [useReducedMotion.ts:25-27](file://app/hooks/useReducedMotion.ts#L25-L27)
+- [Hero.tsx:11-34](file://app/components/Hero.tsx#L11-L34)
 - [Decorations.tsx:4-106](file://app/components/Decorations.tsx#L4-L106)
 - [CustomCursor.tsx:5-9](file://app/components/CustomCursor.tsx#L5-L9)
-- [page.tsx:27-54](file://app/page.tsx#L27-L54)
+- [page.tsx:30-57](file://app/page.tsx#L30-L57)
 
 **Section sources**
 - [useMouseParallax.ts:1-66](file://app/hooks/useMouseParallax.ts#L1-L66)
-- [useReducedMotion.ts:1-20](file://app/hooks/useReducedMotion.ts#L1-L20)
-- [Hero.tsx:1-187](file://app/components/Hero.tsx#L1-L187)
+- [useReducedMotion.ts:1-28](file://app/hooks/useReducedMotion.ts#L1-L28)
+- [Hero.tsx:1-203](file://app/components/Hero.tsx#L1-L203)
 - [Decorations.tsx:1-190](file://app/components/Decorations.tsx#L1-L190)
 - [CustomCursor.tsx:1-92](file://app/components/CustomCursor.tsx#L1-L92)
-- [page.tsx:1-200](file://app/page.tsx#L1-L200)
+- [page.tsx:1-637](file://app/page.tsx#L1-L637)
 
 ## Core Components
 - useMouseParallax(config): Creates a container ref, tracks normalized mouse position within that container, and returns smoothed x/y motion values via Framer Motion springs. Also exposes raw mouseX/mouseY motion values so child elements can compute their own parallax offsets.
 - useMouseParallaxValue(mouseX, mouseY, config): Derives per-element x/y motion values from shared mouseX/mouseY inputs with independent intensity and spring settings. Ideal for decorative layers at different depths.
-- useReducedMotion(): Returns a boolean reflecting the user’s prefers-reduced-motion setting and updates reactively when the preference changes.
+- useReducedMotion(): Returns a boolean reflecting the user's prefers-reduced-motion setting using React's useSyncExternalStore for optimal performance and SSR compatibility, updating reactively when the preference changes.
 
 Key behaviors:
 - Intensity multiplies normalized mouse deltas to create depth effects.
 - Spring smoothing uses damping and stiffness to avoid jitter and provide fluid motion.
 - Mouse events are bound to a specific container to normalize coordinates relative to that element.
-- Reduced motion is respected globally by components that choose to disable animations based on the hook’s result.
+- Reduced motion is respected globally by components that choose to disable animations based on the hook's result.
+- External store pattern ensures consistent behavior across server-side rendering and client hydration.
 
 **Section sources**
 - [useMouseParallax.ts:6-45](file://app/hooks/useMouseParallax.ts#L6-L45)
 - [useMouseParallax.ts:47-65](file://app/hooks/useMouseParallax.ts#L47-L65)
-- [useReducedMotion.ts:5-19](file://app/hooks/useReducedMotion.ts#L5-L19)
+- [useReducedMotion.ts:25-27](file://app/hooks/useReducedMotion.ts#L25-L27)
 
 ## Architecture Overview
 The hooks form a small but powerful layer between DOM events and animated visuals:
@@ -103,7 +111,7 @@ Child-->>User : "parallax visual update"
 
 **Diagram sources**
 - [useMouseParallax.ts:28-44](file://app/hooks/useMouseParallax.ts#L28-L44)
-- [Hero.tsx:11-33](file://app/components/Hero.tsx#L11-L33)
+- [Hero.tsx:11-34](file://app/components/Hero.tsx#L11-L34)
 - [Decorations.tsx:22-106](file://app/components/Decorations.tsx#L22-L106)
 
 ## Detailed Component Analysis
@@ -116,7 +124,7 @@ Responsibilities:
 - Share raw mouseX/mouseY motion values for deeper parallax chains.
 
 Implementation highlights:
-- Uses Framer Motion’s useMotionValue for reactive state without re-renders.
+- Uses Framer Motion's useMotionValue for reactive state without re-renders.
 - Applies useTransform to scale normalized input by intensity.
 - Wraps transformed values with useSpring using configurable damping/stiffness for smooth transitions.
 - Resets motion values to zero on mouse leave to return elements to default positions.
@@ -128,7 +136,7 @@ Performance considerations:
 
 Usage pattern:
 - Attach returned ref and event handlers to a parent container.
-- Apply returned x/y to child elements’ styles for parallax movement.
+- Apply returned x/y to child elements' styles for parallax movement.
 - Optionally pass mouseX/mouseY to useMouseParallaxValue for layered effects.
 
 Configuration options:
@@ -148,8 +156,8 @@ Common pitfalls:
 
 **Section sources**
 - [useMouseParallax.ts:12-45](file://app/hooks/useMouseParallax.ts#L12-L45)
-- [Hero.tsx:11-33](file://app/components/Hero.tsx#L11-L33)
-- [page.tsx:47-54](file://app/page.tsx#L47-L54)
+- [Hero.tsx:11-34](file://app/components/Hero.tsx#L11-L34)
+- [page.tsx:50-57](file://app/page.tsx#L50-L57)
 
 ### useMouseParallaxValue
 Responsibilities:
@@ -174,16 +182,21 @@ Best practices:
 **Section sources**
 - [useMouseParallax.ts:47-65](file://app/hooks/useMouseParallax.ts#L47-L65)
 - [Decorations.tsx:22-106](file://app/components/Decorations.tsx#L22-L106)
-- [Hero.tsx:21-33](file://app/components/Hero.tsx#L21-L33)
+- [Hero.tsx:22-34](file://app/components/Hero.tsx#L22-L34)
 
 ### useReducedMotion
 Responsibilities:
-- Detect and track the user’s reduced motion preference.
+- Detect and track the user's reduced motion preference using React's useSyncExternalStore.
 - Update reactively when the preference changes at runtime.
+- Ensure consistent behavior during server-side rendering and client hydration.
+
+**Updated** Implementation now uses React's useSyncExternalStore for improved performance and SSR compatibility:
 
 Implementation highlights:
-- Initializes state safely for server-side rendering by checking window availability.
-- Subscribes to media query change events to stay in sync with OS/browser settings.
+- Uses useSyncExternalStore with a media query subscription for optimal performance.
+- Implements getSnapshot function to read current reduced motion preference.
+- Provides getServerSnapshot function that returns false during SSR to prevent hydration mismatches.
+- Subscribes to media query change events to stay synchronized with OS/browser settings.
 
 Usage pattern:
 - Consume the boolean in components to conditionally enable/disable animations.
@@ -192,11 +205,17 @@ Usage pattern:
 Accessibility benefits:
 - Honors user preferences to reduce vestibular triggers.
 - Provides fallbacks such as disabling continuous animations or complex transitions.
+- Ensures consistent behavior across server and client environments.
+
+Performance improvements:
+- Eliminates unnecessary re-renders through external store pattern.
+- Reduces memory footprint compared to traditional state management approaches.
+- Optimizes hydration process by providing consistent initial values.
 
 **Section sources**
-- [useReducedMotion.ts:5-19](file://app/hooks/useReducedMotion.ts#L5-L19)
-- [CustomCursor.tsx:5-9](file://app/components/CustomCursor.tsx#L5-L9)
-- [Hero.tsx:33-33](file://app/components/Hero.tsx#L33-L33)
+- [useReducedMotion.ts:7-27](file://app/hooks/useReducedMotion.ts#L7-L27)
+- [CustomCursor.tsx:9-9](file://app/components/CustomCursor.tsx#L9-L9)
+- [Hero.tsx:34-34](file://app/components/Hero.tsx#L34-L34)
 
 ### Usage Examples Across Components
 - Hero section:
@@ -216,18 +235,18 @@ Accessibility benefits:
   - Sections initialize their own parallax containers and propagate mouseX/mouseY to nested decorations.
 
 **Section sources**
-- [Hero.tsx:11-33](file://app/components/Hero.tsx#L11-L33)
-- [Hero.tsx:171-183](file://app/components/Hero.tsx#L171-L183)
+- [Hero.tsx:11-34](file://app/components/Hero.tsx#L11-L34)
+- [Hero.tsx:187-199](file://app/components/Hero.tsx#L187-L199)
 - [Decorations.tsx:22-106](file://app/components/Decorations.tsx#L22-L106)
 - [CustomCursor.tsx:20-59](file://app/components/CustomCursor.tsx#L20-L59)
-- [page.tsx:47-54](file://app/page.tsx#L47-L54)
+- [page.tsx:50-57](file://app/page.tsx#L50-L57)
 
 ## Dependency Analysis
 The hooks depend on Framer Motion primitives and React APIs. Components depend on the hooks to drive animations.
 
 ```mermaid
 graph LR
-React["React (useRef, useState, useEffect)"] --> UMP["useMouseParallax"]
+React["React (useRef, useState, useEffect, useSyncExternalStore)"] --> UMP["useMouseParallax"]
 React --> URM["useReducedMotion"]
 FM["Framer Motion (useMotionValue, useSpring, useTransform)"] --> UMP
 UMP --> HERO["Hero.tsx"]
@@ -243,15 +262,15 @@ URM --> CUR["CustomCursor.tsx"]
 - [Hero.tsx:1-7](file://app/components/Hero.tsx#L1-L7)
 - [Decorations.tsx:1-5](file://app/components/Decorations.tsx#L1-L5)
 - [CustomCursor.tsx:1-5](file://app/components/CustomCursor.tsx#L1-L5)
-- [page.tsx:1-27](file://app/page.tsx#L1-L27)
+- [page.tsx:1-30](file://app/page.tsx#L1-L30)
 
 **Section sources**
 - [useMouseParallax.ts:1-66](file://app/hooks/useMouseParallax.ts#L1-L66)
-- [useReducedMotion.ts:1-20](file://app/hooks/useReducedMotion.ts#L1-L20)
-- [Hero.tsx:1-187](file://app/components/Hero.tsx#L1-L187)
+- [useReducedMotion.ts:1-28](file://app/hooks/useReducedMotion.ts#L1-L28)
+- [Hero.tsx:1-203](file://app/components/Hero.tsx#L1-L203)
 - [Decorations.tsx:1-190](file://app/components/Decorations.tsx#L1-L190)
 - [CustomCursor.tsx:1-92](file://app/components/CustomCursor.tsx#L1-L92)
-- [page.tsx:1-200](file://app/page.tsx#L1-L200)
+- [page.tsx:1-637](file://app/page.tsx#L1-L637)
 
 ## Performance Considerations
 - Prefer MotionValues over React state for high-frequency updates to avoid unnecessary renders.
@@ -260,8 +279,7 @@ URM --> CUR["CustomCursor.tsx"]
 - Limit the number of heavily animated elements in tight loops; favor lightweight decorative layers.
 - Gate expensive animations behind reduced motion checks to improve accessibility and performance on low-end devices.
 - Avoid layout thrashing by reading geometry once per event and not triggering reflows inside event handlers.
-
-[No sources needed since this section provides general guidance]
+- **Updated** The useSyncExternalStore pattern in useReducedMotion eliminates unnecessary re-renders and provides optimal SSR compatibility.
 
 ## Troubleshooting Guide
 Common issues and resolutions:
@@ -286,22 +304,26 @@ Common issues and resolutions:
   - Confirm normalization uses the current container dimensions.
   - Test on various viewports to ensure coordinate math remains correct.
 
+- **Updated** Hydration mismatches with reduced motion:
+  - The useSyncExternalStore pattern handles this automatically by returning false during SSR.
+  - Components should handle both server and client states gracefully.
+
 Debugging tips:
 - Log mouseX/mouseY values temporarily to verify ranges and updates.
 - Temporarily remove springs to isolate whether the issue is event handling or smoothing.
 - Use browser dev tools to inspect MotionValues and observe frame rates.
+- Check media query status using browser developer tools to verify reduced motion detection.
 
 **Section sources**
 - [useMouseParallax.ts:28-44](file://app/hooks/useMouseParallax.ts#L28-L44)
 - [CustomCursor.tsx:20-59](file://app/components/CustomCursor.tsx#L20-L59)
-- [Hero.tsx:171-183](file://app/components/Hero.tsx#L171-L183)
+- [Hero.tsx:187-199](file://app/components/Hero.tsx#L187-L199)
+- [useReducedMotion.ts:17-23](file://app/hooks/useReducedMotion.ts#L17-L23)
 
 ## Conclusion
-The portfolio’s interactive experiences are powered by two focused hooks:
+The portfolio's interactive experiences are powered by two focused hooks:
 - useMouseParallax centralizes mouse tracking and delivers smooth, configurable parallax motion values.
 - useMouseParallaxValue enables layered depth by deriving per-element motion from shared inputs.
-- useReducedMotion ensures accessibility by respecting user preferences and enabling graceful fallbacks.
+- useReducedMotion ensures accessibility by respecting user preferences using React's useSyncExternalStore for optimal performance and SSR compatibility, enabling graceful fallbacks.
 
-By combining these hooks with Framer Motion primitives, the project achieves performant, accessible, and visually rich interactions. Follow the configuration guidelines and best practices outlined here to extend and maintain the animation system effectively.
-
-[No sources needed since this section summarizes without analyzing specific files]
+By combining these hooks with Framer Motion primitives, the project achieves performant, accessible, and visually rich interactions. The enhanced useReducedMotion hook now leverages React's external store pattern for improved performance, better SSR support, and more reliable behavior across different environments. Follow the configuration guidelines and best practices outlined here to extend and maintain the animation system effectively.
